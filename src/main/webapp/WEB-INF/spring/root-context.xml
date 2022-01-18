@@ -51,14 +51,14 @@
         </bean>
 
         <aop:config>
-            <aop:pointcut expression="execution(* com.pcwk.ehr..service.*Impl.*(..))" id="txPointCut"/>
+            <aop:pointcut expression="execution(* com.dwav..service.*Impl.*(..))" id="txPointCut"/>
             <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
         </aop:config>
         
         
 
         <!-- dev용 MailSender -->
-        <!-- <bean id="mailSender" class="com.pcwk.ehr.cmn.DummyMailSender"/> -->
+        <!-- <bean id="mailSender" class="com.dwav.cmn.DummyMailSender"/> -->
         <!-- Naver smtp                                           
         JavaMailSenderImpl    -->                                               
          
