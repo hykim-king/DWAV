@@ -16,5 +16,7 @@
       <typeAlias type="com.dwav.vo.BookingVO" alias="BookingVO"/>
       <typeAlias type="com.dwav.vo.FacilitiesVO" alias="FacilitiesVO"/>
       <typeAlias type="com.dwav.vo.ImageVO" alias="ImageVO"/>
+      <typeAlias type="com.dwav.vo.UserVO" alias="UserVO"/>
+      <typeAlias type="com.dwav.vo.SearchVO" alias="SearchVO"/>
    </typeAliases>
 </configuration>

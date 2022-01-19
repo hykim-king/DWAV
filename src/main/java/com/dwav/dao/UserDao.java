@@ -1,4 +1,4 @@
-package com.dwav.daoImp;
+package com.dwav.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

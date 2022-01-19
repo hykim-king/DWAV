@@ -24,6 +24,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Repository;
 
+import com.dwav.dao.UserDao;
 import com.dwav.vo.SearchVO;
 import com.dwav.vo.UserVO;
 
