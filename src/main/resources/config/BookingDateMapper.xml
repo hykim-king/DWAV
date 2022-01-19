@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dwav">
+	<select id="getBookingDateListByHomeId" resultType="BookingDateVO">
+		select * from BookingDate where accom_id=#{value}
+	</select>
+	<select id="getBookingDateListByBookingId" resultType="BookingDateVO">
+		select * from BookingDate where accom_id=#{value}
+	</select>
+	<select id="getBookingDateIdListByDates" parameterType="hashmap" resultType="BookingDateVO">
+		select * from BookingDate where reserv_date between TO_DATE(#{startDate},'yyyy-MM-dd') and TO_DATE(#{endDate},'yyyy-MM-dd')
+	</select>
+	<insert id="insertBookingDate" parameterType="BookingDateVO">
+     INSERT INTO bookingdate (
+            rd_id,
+            accom_id,
+            reserv_date,
+            reserv_id
+        ) VALUES (
+           #{rd_id       jdbcType=VARCHAR  },
+           #{accom_id    jdbcType=VARCHAR  },
+   TO_DATE #{reserv_date  },
+           #{reserv_id   jdbcType=VARCHAR  },
+        )
+	</insert>
+
+	<delete id="deleteBookingDateByHomeDateId">
+		delete from BookingDate where rd_id = #{value}
+	</delete>   
+	<delete id="deleteBookingDateByBookingDateId">
+		delete from BookingDate where reserv_id = #{value}
+	</delete>
+	<delete id="deleteBookingDateListByBookingDates" parameterType="hashmap">
+		delete from BookingDate where reserv_id = #{reserv_id}
+		and reserv_date <![CDATA[>=]]> #{start_date}
+		and reserv_date <![CDATA[<=]]> #{end_date}
+	</delete>
+	<select id="checkBookingDate" parameterType="hashmap" resultType="BookingDateVO">
+		select accom_id, rd_id, reserv_date 
+		from BookingDate 
+		where accom_id = #{accom_id}
+		and reserv_date between TO_DATE(#{startDate},'yyyy-MM-dd') 
+			and TO_DATE(#{endDate},'yyyy-MM-dd')
+	</select>
+</mapper>

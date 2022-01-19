@@ -9,7 +9,7 @@ public class HomeVO {
 	int beds;
 	String building_type;
 	String currency_unit;
-	String description;
+	String descrption;
 	String host_id;
 	String location;
 	String name;
@@ -33,7 +33,7 @@ public class HomeVO {
 		this.beds = beds;
 		this.building_type = building_type;
 		this.currency_unit = currency_unit;
-		this.description = description;
+		this.descrption = descrption;
 		this.host_id = host_id;
 		this.location = location;
 		this.name = name;
@@ -61,7 +61,7 @@ public class HomeVO {
 		this.beds = beds;
 		this.building_type = building_type;
 		this.currency_unit = currency_unit;
-		this.description = description;
+		this.descrption = descrption;
 		this.host_id = host_id;
 		this.location = location;
 		this.name = name;
@@ -197,13 +197,13 @@ public class HomeVO {
 
 
 	public String getDescription() {
-		return description;
+		return descrption;
 	}
 
 
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.descrption = description;
 	}
 
 

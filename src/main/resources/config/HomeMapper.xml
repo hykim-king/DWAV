@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dwav">
+
+	<select id="getHomeByHomeId" resultType="HomeVO">
+		select * from home where accom_id=#{value}
+	</select>
+	
+	<select id="getHomeByHostId" resultType="HomeVO">
+		select * from home where host_id=#{host_id}	
+	</select>
+	
+  	<insert id="insertHome" parameterType="HomeVO">
+		INSERT INTO home (
+			accomodates,
+			bathrooms,
+			bedrooms,
+			beds,
+			building_type,
+			currency_unit,
+			descrption,
+			host_id,
+			location,
+			name,
+			price,
+			property_type,
+			room_type
+		) VALUES (
+			#{accomodates   },
+			#{bathrooms     },
+			#{bedrooms      },
+			#{beds          },
+			#{building_type ,jdbcType=VARCHAR},
+			#{currency_unit ,jdbcType=VARCHAR},
+			#{descrption    ,jdbcType=VARCHAR},
+			#{host_id       },
+			#{location      ,jdbcType=VARCHAR},
+			#{name          ,jdbcType=VARCHAR},
+			#{price         },
+			#{property_type ,jdbcType=VARCHAR},
+			#{room_type     ,jdbcType=VARCHAR}
+		)
+        
+	</insert> 
+	
+   <delete id="deleteAll">
+        DELETE from home
+ ` </delete>
+	
+	<delete id="deleteHome">
+		delete from home where accom_id = #{value}
+	</delete>
+	
+	<update id="updateHome" parameterType="HomeVO">
+		update home set accomodates = #{accomodates                           },
+						bathrooms   = #{bathrooms                             },
+						bedrooms    = #{bedrooms 					       	  },
+						descrption  = #{descrption       ,jdbcType=VARCHAR    }, 
+						host_id = #{host_id              ,jdbcType=VARCHAR    }, 
+						location = #{location            ,jdbcType=VARCHAR    }, 
+						price = #{price                                       },
+						property_type = #{property_type  ,jdbcType=VARCHAR    }, 
+						room_type = #{room_type          ,jdbcType=VARCHAR    }, 
+						beds = #{beds				   					      }, 
+						building_type = #{building_type  ,jdbcType=VARCHAR    }, 
+						currency_unit = #{currency_unit  ,jdbcType=VARCHAR    },
+						name = #{name                    ,jdbcType=VARCHAR    }, 
+						avg_point = #{avg_point                               }
+		where accom_id = #{accom_id} 
+	</update>
+	
+	<select id="getHomeListBySearchBar" parameterType="hashmap" resultType="HomeVO">
+		select * 
+		from home 
+		where not exists (
+			select distinct accom_id, rd_id, reserv_date 
+			from reserveddate 
+			where reserv_date between TO_DATE(#{startDate},'yyyy-MM-dd') 
+				and TO_DATE(#{endDate},'yyyy-MM-dd')
+		) 
+		and accomodates <![CDATA[>=]]> #{numpeople}
+		and location like '%'||#{location}||'%'
+	</select>
+	
+	<select id="getHomeListBySearchBarUsingPriceFilter" parameterType="hashmap" resultType="HomeVO">
+		select * from home where not exists (
+			select distinct accom_id, rd_id, reserv_date 
+			from reserveddate 
+			where reserv_date between TO_DATE(#{startDate},'yyyy-MM-dd') 
+				and TO_DATE(#{endDate},'yyyy-MM-dd')
+		) 
+		and location like '%'||#{location}||'%'
+		and accomodates <![CDATA[>=]]> #{numPeople}
+		and price <![CDATA[>=]]> #{startPrice}
+		and price<![CDATA[<=]]> #{endPrice}
+	</select>
+	
+
+	<select id="checkAccomId" resultType="int">
+		select ACCOM_ID_AUTOINC.CURRVAL from dual
+	</select>
+	
+	
+</mapper>

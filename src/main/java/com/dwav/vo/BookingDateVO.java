@@ -7,7 +7,7 @@ public class BookingDateVO {
 	String reserv_date;
 	int reserv_id;
 	
-	
+	public BookingDateVO(){}
 
 	public int getAccom_id() {
 		return accom_id;
@@ -73,10 +73,6 @@ public class BookingDateVO {
 				+ ", reserv_id=" + reserv_id + "]";
 	}
 
-	public BookingDateVO()
-	{
-		
-	}
 	
 	
 }
