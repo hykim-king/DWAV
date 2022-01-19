@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
 	@Inject
 	SqlSessionTemplate  sqlSessionTemplate;
 	
-	final String NAMESPACE = "com.pcwk.ehr.member";
+	final String NAMESPACE = "dwav";
 	
 	
 	public UserDaoImpl() {}

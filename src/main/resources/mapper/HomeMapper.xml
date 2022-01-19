@@ -43,7 +43,7 @@
         
 	</insert> 
 	
-   <delete id="deleteAll" parameterType="HomeVO">
+   <delete id="deleteAllHome" parameterType="HomeVO">
         DELETE from home
  ` </delete>
 	
