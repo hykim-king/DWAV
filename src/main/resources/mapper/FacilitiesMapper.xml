@@ -14,7 +14,7 @@
 	<select id="getAmenityListByAccomId" resultType="FacilitiesVO">
 		select * from Facilities where accom_id = #{accom_id}
 	</select>
-	<insert id="insertAmenity" parameterType="FacilitiesVO">
+	<insert id="insertAmenity" parameterType="FacilitiesVO" >
 		INSERT INTO facilities (
 			amen_id,
 			accom_id,

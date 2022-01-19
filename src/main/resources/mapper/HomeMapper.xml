@@ -43,11 +43,11 @@
         
 	</insert> 
 	
-   <delete id="deleteAll">
+   <delete id="deleteAll" parameterType="HomeVO">
         DELETE from home
  ` </delete>
 	
-	<delete id="deleteHome">
+	<delete id="deleteHome" parameterType="HomeVO">
 		delete from home where accom_id = #{value}
 	</delete>
 	
@@ -70,16 +70,27 @@
 	</update>
 	
 	<select id="getHomeListBySearchBar" parameterType="hashmap" resultType="HomeVO">
-		select * 
-		from home 
-		where not exists (
-			select distinct accom_id, rd_id, reserv_date 
-			from reserveddate 
-			where reserv_date between TO_DATE(#{startDate},'yyyy-MM-dd') 
-				and TO_DATE(#{endDate},'yyyy-MM-dd')
-		) 
-		and accomodates <![CDATA[>=]]> #{numpeople}
-		and location like '%'||#{location}||'%'
+		
+		SELECT
+			 z.location         ={location         }
+			,z.accom_id         ={accom_id         }
+			,z.host_id          ={host_id          }
+			,z.descrption       ={descrption       }
+			,z.accomodates      ={accomodates      }
+			,y.reserv_date      ={reserv_date      }
+			,y.accom_id         ={accom_id         }
+			,x.end_date         ={end_date         }
+			,x.state_date       ={state_date       }
+			,x.price            ={price            }
+			,x.number_of_people ={number_of_people }
+		FROM
+			bookingdate y,
+			booking     x,
+			home        z
+		WHERE
+				x.reserv_id = y.reserv_id
+			AND z.accom_id  = y.accom_id
+			AND z.accom_id  = x.accom_id
 	</select>
 	
 	<select id="getHomeListBySearchBarUsingPriceFilter" parameterType="hashmap" resultType="HomeVO">
