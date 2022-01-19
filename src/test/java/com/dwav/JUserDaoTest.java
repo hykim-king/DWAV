@@ -20,19 +20,21 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.cmn.SearchVO;
-import com.pcwk.ehr.member.dao.UserDao;
-import com.pcwk.ehr.member.domain.MakeHost;
-import com.pcwk.ehr.member.domain.UserVO;
+import com.dwav.dao.UserDao;
+import com.dwav.vo.MakeHost;
+import com.dwav.vo.SearchVO;
+import com.dwav.vo.UserVO;
+
+
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)//JUnit기능 스프링 프레임으로 확장
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                                    "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"}) //applicationContext.xml loading
-public class JUserDaoTest {
+public class JUserDaoTest {			
 	final Logger LOG = LogManager.getLogger(getClass());
-	
+
 	@Autowired
 	ApplicationContext context;
 	

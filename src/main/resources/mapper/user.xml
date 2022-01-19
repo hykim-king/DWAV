@@ -6,7 +6,7 @@
     <!-- 이 안에 CRUD 쿼리 집어넣고, dao에서 여기를 call하면 된다! -->
 
     <!-- 전체 조회 -->
-    <select id="getAll" resultType="com.dwav.vo.UserVO">
+    <select id="getAll" resultType="UserVO">
 SELECT
     user_id,
     user_pwd,
@@ -27,7 +27,7 @@ FROM
 
 
       <!-- 수정 -->
-    <update id="doUpdate" parameterType="com.dwav.vo.UserVO">
+    <update id="doUpdate" parameterType="UserVO">
         UPDATE member
         SET         
              
@@ -55,7 +55,7 @@ FROM
 
 
     <!-- 회원 가입 : namespace+id -> -->
-    <insert id="doInsert" parameterType="com.dwav.vo.UserVO">
+    <insert id="doInsert" parameterType="UserVO">
       INSERT INTO member(            
             user_id,
             user_pwd,
@@ -98,7 +98,7 @@ FROM
     </delete>
 
     <!-- 회원 탈퇴(단건 삭제): deleteAll에서 where절 붙이기 스프링에서는 이렇게 호출한다. -->
-    <delete id="doDelete" parameterType="com.dwav.vo.UserVO">
+    <delete id="doDelete" parameterType="UserVO">
         DELETE FROM member
         WHERE
         user_id = #{user_id}
@@ -106,7 +106,7 @@ FROM
 
 
     <!-- 단건 조회 -->
-    <select id="doSelectOne" parameterType="com.dwav.vo.UserVO"
+    <select id="doSelectOne" parameterType="UserVO"
         resultMap="userResultMap">
 
     <![CDATA[ 
@@ -127,7 +127,7 @@ FROM
     </select>
 
 
-    <resultMap type="com.dwav.vo.UserVO" id="userResultMap">
+    <resultMap type="UserVO" id="userResultMap">
         <id property="user_id" column="user_id" />
         <result property="user_pwd" column="user_pwd" />
         <result property="first_name" column="first_name" />
@@ -182,8 +182,8 @@ FROM
         </where>
     </sql>
 
-    <select id="doRetrieveUser" parameterType="com.dwav.vo.SearchVO"
-        resultType="com.dwav.vo.UserVO">
+    <select id="doRetrieveUser" parameterType="SearchVO"
+        resultType="UserVO">
         SELECT A.*, B.*
         FROM(
           SELECT tt1.rnum AS num,
