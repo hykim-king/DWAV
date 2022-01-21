@@ -197,7 +197,32 @@ public class UserDaoImpl implements UserDao {
 		return list;
 	}
 
+	@Override
+	public int pwCheck(UserVO inVO) throws SQLException {
+		String statement = NAMESPACE+".pwCheck";
+		LOG.debug("==============================");
+		LOG.debug("=param="+inVO.toString());
+		LOG.debug("=statement="+statement);
+		LOG.debug("==============================");
+		
+		// getCount()와 비교 
+		
+		return this.sqlSessionTemplate.selectOne(statement,inVO);
+	}
 
+
+	@Override
+	public int idCheck(UserVO inVO) throws SQLException {
+		String statement = NAMESPACE+".idCheck";
+		LOG.debug("==============================");
+		LOG.debug("=param="+inVO.toString());
+		LOG.debug("=statement="+statement);
+		LOG.debug("==============================");
+		int count = sqlSessionTemplate.selectOne(statement,inVO);
+		LOG.debug("count :" + count);
+
+		return count;
+	}
 
 }
 

@@ -75,6 +75,29 @@ public class JUserDaoTest {
 		
 	}
 	
+	/**
+	 * 1. 로그인 시, 통과 되어야 로그인 됨.
+	 * 
+	 * 2. 중복 체크 시 조회가 되면 중복이 된다는 뜻임! 즉, 테스트가 통과되면 중복, 테스트에서 assertion 오류나면 중복 아님
+	 * @throws SQLException
+	 */
+	@Test
+	//@Ignore
+	public void idCheck() throws SQLException{
+		// 1. 기존 데이터 삭제
+		dao.doDelete(user01);
+		dao.doDelete(user02);
+		dao.doDelete(user03);
+		
+		// 2. 신규등록: user01
+		dao.doInsert(user01);
+		int flag = dao.idCheck(user01);
+
+		assertEquals(1, flag);
+		
+	}
+	
+	
 	@Test
 	//@Ignore
 	public void doRetrieve() throws SQLException{

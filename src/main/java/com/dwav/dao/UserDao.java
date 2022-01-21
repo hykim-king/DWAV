@@ -16,6 +16,24 @@ import com.dwav.vo.UserVO;
 public interface UserDao {
 	
 	/**
+	 * 비밀번호 check
+	 * @param inVO
+	 * @return
+	 * @throws SQLException
+	 */
+	int pwCheck(UserVO inVO) throws SQLException;
+	
+	/**
+	 * 1. 로그인 시, 통과 되어야 로그인 됨.
+	 * 
+	 * 2. 중복 체크 시 조회가 되면 중복이 된다는 뜻임! 즉, 테스트가 통과되면 중복, 테스트에서 assertion 오류나면 중복 아님
+	 * @param inVO
+	 * @return
+	 * @throws SQLException
+	 */
+	int idCheck(UserVO inVO) throws SQLException;
+	
+	/**
 	 * 전체 회원 조회
 	 * @return
 	 */
