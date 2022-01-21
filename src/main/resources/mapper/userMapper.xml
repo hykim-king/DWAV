@@ -7,41 +7,38 @@
 
     <!-- 전체 조회 -->
     <select id="getAll" resultType="UserVO">
-SELECT
-    user_id,
-    user_pwd,
-    first_name,
-    last_name,
-    birth_date,
-    email,
-    user_ph_num,
-    user_img,
-    user_intro,
-    join_date,
-    email_auth,
-    enlist_host,
-    make_host as int_make_host
-FROM
-    member
+        SELECT
+            user_id,
+            user_pwd,
+            first_name,
+            last_name,
+            birth_date,
+            email,
+            user_ph_num,
+            user_img,
+            user_intro,
+            join_date,
+            email_auth,
+            user_state
+        FROM
+            member
     </select>
 
 
       <!-- 수정 -->
     <update id="doUpdate" parameterType="UserVO">
         UPDATE member
-        SET         
-             
-             user_pwd       = #{user_pwd}
-            ,first_name     = #{first_name}
-            ,last_name      = #{last_name}
-            ,birth_date     = #{birth_date}
-            ,email          = #{email}
-            ,user_ph_num    = #{user_ph_num}
-            ,user_img       = #{user_img}
-            ,user_intro     = #{user_intro}
-            ,join_date      = #{join_date}
-            ,make_host      = #{int_make_host}
-        WHERE user_id = #{user_id} 
+        SET     
+             user_pwd   = #{user_pwd}   
+            ,first_name = #{first_name} 
+            ,last_name  = #{last_name}  
+            ,birth_date = #{birth_date} 
+            ,email      = #{email}      
+            ,user_ph_num= #{user_ph_num}
+            ,user_img   = #{user_img}   
+            ,user_intro = #{user_intro} 
+            ,join_date  = #{join_date}  
+        WHERE user_id   = #{user_id}
     </update>
 
 
@@ -54,9 +51,9 @@ FROM
 
 
 
-    <!-- 회원 가입 : namespace+id -> -->
+    <!-- 회원 가입 : namespace+id ->O -->
     <insert id="doInsert" parameterType="UserVO">
-      INSERT INTO member(            
+        INSERT INTO member (
             user_id,
             user_pwd,
             first_name,
@@ -65,13 +62,8 @@ FROM
             email,
             user_ph_num,
             user_img,
-            user_intro,
-            join_date,
-            email_auth,
-            enlist_host
-            
-            
-    ) VALUES (
+            user_intro
+        ) VALUES (
             #{user_id},
             #{user_pwd},
             #{first_name},
@@ -80,14 +72,8 @@ FROM
             #{email},
             #{user_ph_num},
             #{user_img},
-            #{user_intro},
-            sysdate, 
-            #{email_auth},
-            #{enlist_host}
-            
-    )
-
-
+            #{user_intro}
+        )
     </insert>
 
 
@@ -111,18 +97,20 @@ FROM
 
     <![CDATA[ 
         SELECT
-            user_id AS user_id,
-            user_pwd AS user_pwd,
-            first_name As first_name,
-            last_name AS last_name,
-            birth_date AS birth_date,
-            email AS email,
-            user_ph_num AS user_ph_num,
-            user_img AS user_img,
-            user_intro AS user_intro,
-            join_date AS join_date,
-            make_host AS int_make_host
-        FROM member
+            user_id,
+            user_pwd,
+            first_name,
+            last_name,
+            birth_date,
+            email,
+            user_ph_num,
+            user_img,
+            user_intro,
+            join_date,
+            email_auth,
+            user_state
+        FROM
+            member
         WHERE user_id = #{user_id} ]]>
     </select>
 
@@ -138,7 +126,9 @@ FROM
         <result property="user_img" column="user_img" />
         <result property="user_intro" column="user_intro" />
         <result property="join_date" column="join_date" />
-        <result property="int_make_host" column="make_host" />
+        <result property="email_auth" column="email_auth" />
+        <result property="user_state" column="user_state" />
+        
         
     </resultMap>
 
@@ -152,73 +142,62 @@ FROM
                     user_id LIKE #{searchWord}||'%'
                 </when>
             <when test=" '20' == searchDiv and '' != searchWord  ">
-                    user_pwd LIKE #{searchWord}||'%'
-                </when>
-            <when test=" '30' == searchDiv and '' != searchWord  ">
                     first_name LIKE #{searchWord}||'%'
                 </when>
-            <when test=" '40' == searchDiv and '' != searchWord  ">
+            <when test=" '30' == searchDiv and '' != searchWord  ">
                     last_name LIKE #{searchWord}||'%'
                 </when>
-            <when test=" '50' == searchDiv and '' != searchWord  ">
+            <when test=" '40' == searchDiv and '' != searchWord  ">
                     birth_date LIKE #{searchWord}||'%'
                 </when>
-            <when test=" '60' == searchDiv and '' != searchWord  ">
+            <when test=" '50' == searchDiv and '' != searchWord  ">
                     email LIKE #{searchWord}||'%'
                 </when>
-            <when test=" '70' == searchDiv and '' != searchWord  ">
+            <when test=" '60' == searchDiv and '' != searchWord  ">
                     user_ph_num LIKE #{searchWord}||'%'
                 </when>
-            <when test=" '80' == searchDiv and '' != searchWord  ">
-                    user_img LIKE #{searchWord}||'%'
-                </when>
-            <when test=" '90' == searchDiv and '' != searchWord  ">
-                    user_intro LIKE #{searchWord}||'%'
-                </when>
-            <when test=" '100' == searchDiv and '' != searchWord  ">
+            <when test=" '70' == searchDiv and '' != searchWord  ">
                     join_date LIKE #{searchWord}||'%'
                 </when>
             </choose>
         </where>
     </sql>
 
-    <select id="doRetrieveUser" parameterType="SearchVO"
+    <select id="doRetrieve" parameterType="SearchVO"
         resultType="UserVO">
         SELECT A.*, B.*
         FROM(
-          SELECT tt1.rnum AS num,
-                 tt1.user_id AS user_id,
-                 tt1.user_pwd AS user_pwd, 
-                 tt1.first_name AS first_name,
-                 tt1.last_name AS last_name,
-                 TO_CHAR(tt1.birth_date,'yyyy/mm/dd') AS birth_date,
-                 tt1.email AS email,
-                 tt1.user_ph_num AS user_ph_num,
-                 tt1.user_img AS user_img,
-                 tt1.user_intro AS user_intro,
-                 DECODE(TO_CHAR(SYSDATE,'YYYYMMDD'),TO_CHAR(tt1.join_date,'YYYYMMDD')
-                       ,TO_CHAR(tt1.join_date, 'HH24:MI')
-                       ,TO_CHAR(tt1.join_date,'YYYY/MM/DD HH24:MI:SS')) join_date,
-                tt1.make_host AS int_make_host                 
-          FROM(
-            SELECT ROWNUM rnum,t1.*
-            FROM (
-                SELECT *
-                FROM member
-                --where 조건
-                <include refid="searchCondition" />
-                ORDER BY joinDate desc
-            )t1
-          )tt1
-          --WHERE rnum between 1 AND 10
-          WHERE rnum between (#{pageSize}* (#{pageNum}-1)+1) AND #{pageSize}*(#{pageNum}-1)+#{pageSize}
+            SELECT TT1.rnum as num
+                   ,tt1.user_id
+                   ,first_name
+                   ,last_name
+                   ,birth_date
+                   ,email
+                   ,user_ph_num
+                   ,CASE WHEN TO_CHAR(SYSDATE,'YYYYMMDD')=TO_CHAR(tt1.join_date,'YYYYMMDD') THEN TO_CHAR(tt1.join_date,'HH24:MI')
+                            ELSE TO_CHAR(tt1.join_date,'YYYY/MM/DD')
+                        END join_date
+            FROM(
+                SELECT ROWNUM rnum,T1.*
+                FROM(
+                    SELECT *
+                    FROM MEMBER
+                    --검색 조건 : id(10) / 성씨 (20)/ 이름 (30)/ 생일 (40)/ 이메일 (50)/ 핸드폰 번호 (60)/ 가입 날짜 (70)/ 
+                    <include refid="searchCondition"/>
+        
+                    
+                    ORDER BY join_date desc
+                )T1
+            )TT1
+            --paging
+            where rnum between #{pageSize}*(#{pageNum}-1)+1 and #{pageSize}*(#{pageNum}-1)+#{pageSize}
         )A
         CROSS JOIN
         (
-          SELECT COUNT(*) totalcnt
-          FROM member
-          --WHERE조건
-          <include refid="searchCondition" />
+            SELECT COUNT(*) total_cnt
+            FROM member
+            --검색조건
+            <include refid="searchCondition"/>
         )B
     </select>
 

@@ -40,34 +40,143 @@ public class UserVO extends DTO {
 	/** 이메일 인증 여부 */
 	private int email_auth;
 	
-	/** 호스트 신청 여부 */
-	private int enlist_host;
-	
-	/** 호스트 가능 상태 */
-	private MakeHost make_host;
-	
-	/** Mybatis */
-	private int int_make_host;
+	private String user_state;
 	
 
 	public UserVO() {}
 
-	
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+
+	public String getUser_pwd() {
+		return user_pwd;
+	}
+
+
+	public void setUser_pwd(String user_pwd) {
+		this.user_pwd = user_pwd;
+	}
+
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+
+	public String getBirth_date() {
+		return birth_date;
+	}
+
+
+	public void setBirth_date(String birth_date) {
+		this.birth_date = birth_date;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getUser_ph_num() {
+		return user_ph_num;
+	}
+
+
+	public void setUser_ph_num(String user_ph_num) {
+		this.user_ph_num = user_ph_num;
+	}
+
+
+	public String getUser_img() {
+		return user_img;
+	}
+
+
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
+	}
+
+
+	public String getUser_intro() {
+		return user_intro;
+	}
+
+
+	public void setUser_intro(String user_intro) {
+		this.user_intro = user_intro;
+	}
+
+
+	public String getJoin_date() {
+		return join_date;
+	}
+
+
+	public void setJoin_date(String join_date) {
+		this.join_date = join_date;
+	}
+
+
+	public int getEmail_auth() {
+		return email_auth;
+	}
+
+
+	public void setEmail_auth(int email_auth) {
+		this.email_auth = email_auth;
+	}
+
+
+	public String getUser_state() {
+		return user_state;
+	}
+
+
+	public void setUser_state(String user_state) {
+		this.user_state = user_state;
+	}
+
 
 	@Override
 	public String toString() {
 		return "UserVO [user_id=" + user_id + ", user_pwd=" + user_pwd + ", first_name=" + first_name + ", last_name="
 				+ last_name + ", birth_date=" + birth_date + ", email=" + email + ", user_ph_num=" + user_ph_num
 				+ ", user_img=" + user_img + ", user_intro=" + user_intro + ", join_date=" + join_date + ", email_auth="
-				+ email_auth + ", enlist_host=" + enlist_host + ", make_host=" + make_host + ", int_make_host="
-				+ int_make_host + ", toString()=" + super.toString() + "]";
+				+ email_auth + ", user_state=" + user_state + ", toString()=" + super.toString() + "]";
 	}
 
 
-
 	public UserVO(String user_id, String user_pwd, String first_name, String last_name, String birth_date, String email,
-			String user_ph_num, String user_img, String user_intro, int email_auth, int enlist_host, MakeHost make_host,
-			int int_make_host) {
+			String user_ph_num, String user_img, String user_intro) {
 		super();
 		this.user_id = user_id;
 		this.user_pwd = user_pwd;
@@ -78,192 +187,13 @@ public class UserVO extends DTO {
 		this.user_ph_num = user_ph_num;
 		this.user_img = user_img;
 		this.user_intro = user_intro;
-		this.email_auth = email_auth;
-		this.enlist_host = enlist_host;
-		this.make_host = make_host;
-		this.int_make_host = int_make_host;
+		this.user_state = user_state;
 	}
 
 
 
-	public String getUser_id() {
-		return user_id;
-	}
 
 
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-
-
-
-	public String getUser_pwd() {
-		return user_pwd;
-	}
-
-
-
-	public void setUser_pwd(String user_pwd) {
-		this.user_pwd = user_pwd;
-	}
-
-
-
-	public String getFirst_name() {
-		return first_name;
-	}
-
-
-
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-
-
-
-	public String getLast_name() {
-		return last_name;
-	}
-
-
-
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-
-
-
-	public String getBirth_date() {
-		return birth_date;
-	}
-
-
-
-	public void setBirth_date(String birth_date) {
-		this.birth_date = birth_date;
-	}
-
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-
-	public String getUser_ph_num() {
-		return user_ph_num;
-	}
-
-
-
-	public void setUser_ph_num(String user_ph_num) {
-		this.user_ph_num = user_ph_num;
-	}
-
-
-
-	public String getUser_img() {
-		return user_img;
-	}
-
-
-
-	public void setUser_img(String user_img) {
-		this.user_img = user_img;
-	}
-
-
-
-	public String getUser_intro() {
-		return user_intro;
-	}
-
-
-
-	public void setUser_intro(String user_intro) {
-		this.user_intro = user_intro;
-	}
-
-
-
-	public String getJoin_date() {
-		return join_date;
-	}
-
-
-
-	public void setJoin_date(String join_date) {
-		this.join_date = join_date;
-	}
-
-
-
-	public int getEmail_auth() {
-		return email_auth;
-	}
-
-
-
-	public void setEmail_auth(int email_auth) {
-		this.email_auth = email_auth;
-	}
-
-
-
-	public int getEnlist_host() {
-		return enlist_host;
-	}
-
-
-
-	public void setEnlist_host(int enlist_host) {
-		this.enlist_host = enlist_host;
-	}
-
-
-
-	public MakeHost getMake_host() {
-		return make_host;
-	}
-
-
-
-	public void setMake_host(MakeHost make_host) {
-		this.make_host = make_host;
-	}
-
-
-
-	public int getInt_make_host() {
-		return int_make_host;
-	}
-
-
-
-	public void setInt_make_host(int int_make_host) {
-		this.int_make_host = int_make_host;
-	}
-
-
-
-	public void makeHost() {
-		MakeHost can_host = this.make_host.canHost();
-		
-		if(null==can_host) {
-			throw new IllegalArgumentException(this.make_host+"호스트 신청을 하지 않았거나, 혹은 이미 당신은 호스트입니다.");
-		}else {
-			this.make_host = can_host;
-		}
-	}
-		
 	
 	
 }

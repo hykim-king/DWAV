@@ -21,7 +21,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.dwav.dao.UserDao;
-import com.dwav.vo.MakeHost;
 import com.dwav.vo.SearchVO;
 import com.dwav.vo.UserVO;
 
@@ -32,9 +31,9 @@ import com.dwav.vo.UserVO;
 @RunWith(SpringJUnit4ClassRunner.class)//JUnit기능 스프링 프레임으로 확장
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                                    "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"}) //applicationContext.xml loading
-public class JUserDaoTest {			
+public class JUserDaoTest {
 	final Logger LOG = LogManager.getLogger(getClass());
-
+	
 	@Autowired
 	ApplicationContext context;
 	
@@ -63,11 +62,9 @@ public class JUserDaoTest {
 		
 		searchVO = new SearchVO("","",10,1);
 		
-		user01 = new UserVO("physicskdh01","rlaehgud","Kim1","dohyoung","2012-11-23","physicskdh1m","020-9146-9869","asdasd","asdasd",0,0,MakeHost.USER,0);
-		user02 = new UserVO("physicskdh02","rlaehgud","Kim2","dohyoung","2012-11-23","physicskdh2m","030-9146-9869","asdasd","asdasd",0,0,MakeHost.USER,0);
-		user03 = new UserVO("physicskdh03","rlaehgud","Kim3","dohyoung","2012-11-23","physicskdh3m","010-9146-9869","asdasd","asdasd",0,0,MakeHost.USER,0);
-		
-
+		user01 = new UserVO("physicskdh01","rlaehgud","Kim1","dohyoung","20121123","physicskdh@com1","020-9146-9869","asdasd","asdasd");
+		user02 = new UserVO("physicskdh02","rlaehgud","Kim2","dohyoung","20121123","physicskdh@com2","030-9146-9869","asdasd","asdasd");
+		user03 = new UserVO("physicskdh03","rlaehgud","Kim3","dohyoung","20121123","physicskdh@com3","010-9146-9869","asdasd","asdasd");
 		
 		LOG.debug("1=============================");
 		LOG.debug("1context="+context);
@@ -79,12 +76,12 @@ public class JUserDaoTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doRetrieve() throws SQLException{
 		searchVO.setSearchDiv("");
 		searchVO.setSearchWord("");
 		List<UserVO> list = dao.doRetrieve(searchVO);
-		//assertEquals(1,list.size());
+		//assertEquals(3,list.size());
 	
 			
 		
@@ -119,7 +116,7 @@ public class JUserDaoTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void  getAll() throws SQLException{
 		//1. 전체 삭제
 		//2. 데이터 입력 3건
@@ -149,8 +146,8 @@ public class JUserDaoTest {
 	
 	
 	//EmptyResultDataAccessException 예외가 발생하면 : 성공
-	@Test(expected = EmptyResultDataAccessException.class)
-	@Ignore
+	@Test//(expected = EmptyResultDataAccessException.class)
+	//@Ignore
 	public void getFailure() throws SQLException{
 		LOG.debug("========================");
 		LOG.debug("getFailure()");

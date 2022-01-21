@@ -58,7 +58,7 @@
         
 
         <!-- dev용 MailSender -->
-        <!-- <bean id="mailSender" class="com.dwav.cmn.DummyMailSender"/> -->
+        <bean id="mailSender" class="com.dwav.cmn.DummyMailSender"/>
         <!-- Naver smtp                                           
         JavaMailSenderImpl    -->                                               
          
