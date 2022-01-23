@@ -1,160 +1,112 @@
+/**
+ * 
+ */
 package com.dwav.service;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.sql.DataSource;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailSender;
+import org.springframework.stereotype.Service;
 
-import com.dwav.cmn.TestUserServiceException;
+import com.dwav.cmn.MessageVO;
 import com.dwav.dao.UserDao;
-import com.dwav.vo.MakeHost;
 import com.dwav.vo.SearchVO;
 import com.dwav.vo.UserVO;
 
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.springframework.transaction.support.TransactionSynchronization;
-import org.springframework.jdbc.datasource.DataSourceUtils;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-/*
- *         <!-- service -->
-        <bean id="userService" class="com.pcwk.ehr.member.service.UserServiceImpl">
-          <property name="userDao" ref="userDao"/>
-          <property name="dataSource" ref="dataSource"></property>
-          <property name="transactionManager" ref="transactionManager"/>
-          <property name="mailSender" ref="mailSender"></property>
-        </bean>
+
+/**
+ * @author Dosn
+ *
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-	final Logger LOG = LogManager.getLogger(getClass());
-
-	public static final boolean TRANSACTION_TEST = false;
+    final Logger LOG = LogManager.getLogger(getClass());
 
 	@Autowired
-	UserDao userDao;
-
-	MakeHost makeHost;
-
+    UserDao userDao;
+	
 	@Autowired
 	@Qualifier("mailSender")
 	MailSender mailSender;
-
-	public UserServiceImpl() {
-
+	
+	public UserServiceImpl() {}
+	
+	
+	
+	@Override
+	public MessageVO doLogin(UserVO inVO) throws SQLException {
+	
+		MessageVO message = new MessageVO();
+		int flag;
+	
+		// 1. ID 확인: 이상 있을 시 10
+		flag = userDao.idCheck(inVO);
+		if(1 != flag) {
+			message.setMsgId("10");
+			message.setMsgContents("아이디를 확인 하세요.");
+			
+			return message;
+		}
+		
+		// 2. PASSWD 체크: 이상 있을 시 20
+		
+		flag = userDao.pwCheck(inVO);
+		if(1 != flag) {
+			message.setMsgId("20");
+			message.setMsgContents("비밀번호를 확인 하세요.");
+			
+			return message;
+		}
+		
+		// 3. 메세지 보내기: 둘다 정상이면 30
+		message.setMsgId("30");
+		message.setMsgContents("아이디, 비밀번호가 확인되었습니다.");
+		
+		return message;
 	}
 
 	@Override
-	public void makeHosts() throws Exception {
-		List<UserVO> list = userDao.getAll();
-		for (UserVO user : list) {
-			boolean upgradeHost = false;
+	public int idCheck(UserVO inVO) throws SQLException {
 
-			try {
-				if (canMakeHost(user)) {
-					makeHost(user);
-				}
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		} // --for
-
-	}// --upgradeLevels()
-
-	@Override
-	public int add(UserVO inVO) throws SQLException {
-		// makeHost가 null인 경우, MakeHost.USER
-		if(null == inVO.getMake_host()) {
-			inVO.setMake_host(MakeHost.USER);
-		}
-		return userDao.doInsert(inVO);
-	}
-
-	/**
-	 * UserVO의 MakeHost 값이 USER : host신청안함 UserVO의 MakeHost 값이 HOST : host
-	 * 
-	 * @throws IllegalAccessException
-	 * 
-	 */
-	public Boolean canMakeHost(UserVO user) throws IllegalAccessException {
-
-		MakeHost currentState = user.getMake_host();
-
-		switch (currentState) {
-		case USER:
-			return true;
-		case HOST:
-			return false;
-		default:
-			throw new IllegalAccessException("Unknown Level:" + currentState);
-		}
-	}
-
-	@Override
-	public void makeHost(UserVO user) throws SQLException {
-		// transaction테스트 코드 : TRANSACTION_TEST==true면
-		if ("PCWK04".equals(user.getUser_id()) && TRANSACTION_TEST == true) {
-			throw new TestUserServiceException("트랜잭션 테스트:" + user.getUser_id());
-		}
-
-		user.makeHost();
-		userDao.doUpdate(user);
-		sendUpgradeMail(user);
-
-	}
-
-	/**
-	 * 등업 사용자에게 mail전송.
-	 * 
-	 * @param user
-	 */
-	private void sendUpgradeMail(UserVO user) {
-//		PasswordAuthentication													
-//		Authenticator													
-//		Session: Authenticator+PasswordAuthentication													
-//		JavaMailSenderImpl		
-		SimpleMailMessage simpleMessage = new SimpleMailMessage();
-		simpleMessage.setTo(user.getEmail());
-		simpleMessage.setFrom("rainbow160@naver.com");
-		simpleMessage.setSubject("등업안내");
-		simpleMessage.setText("사용자의 등급이 " + user);
-
-		mailSender.send(simpleMessage);
-
+		return userDao.idCheck(inVO);
 	}
 
 	@Override
 	public UserVO doSelectOne(UserVO inVO) throws SQLException {
+
 		return userDao.doSelectOne(inVO);
 	}
 
 	@Override
 	public int doDelete(UserVO inVO) throws SQLException {
+
 		return userDao.doDelete(inVO);
 	}
 
 	@Override
 	public int doUpdate(UserVO inVO) throws SQLException {
+
 		return userDao.doUpdate(inVO);
 	}
 
 	@Override
 	public List<UserVO> doRetrieve(SearchVO inVO) throws SQLException {
+
 		return userDao.doRetrieve(inVO);
+	}
+
+
+
+	@Override
+	public int add(UserVO inVO) throws SQLException {
+
+		return userDao.doInsert(inVO);
 	}
 
 }

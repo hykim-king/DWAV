@@ -3,14 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dwav">
-    <!-- 이 안에 CRUD 쿼리 집어넣고, dao에서 여기를 call하면 된다! -->
-
-
-   <!-- passwd check -->
-   <select id = "pwCheck" resultType="int" parameterType="UserVO">
-    select count(*) cnt
+   <!-- 이 안에 CRUD 쿼리 집어넣고, dao에서 여기를 call하면 된다! -->
+    
+      <!-- passwd check -->
+  <select id = "pwCheck" resultType="int" parameterType="UserVO">
+  select count(*) cnt
     from member
-    where user_id  = #{user_id}
+    where user_id   = #{user_id}
     and   user_pwd = #{user_pwd}
    </select>
     
@@ -20,8 +19,8 @@
     FROM member
     WHERE user_id = #{user_id}
     </select>
-
-
+    
+    
     <!-- 전체 조회 -->
     <select id="getAll" resultType="UserVO">
         SELECT
@@ -54,7 +53,7 @@
             ,user_ph_num= #{user_ph_num}
             ,user_img   = #{user_img}   
             ,user_intro = #{user_intro} 
-            ,join_date  = #{join_date}  
+            
         WHERE user_id   = #{user_id}
     </update>
 
@@ -186,11 +185,12 @@
         FROM(
             SELECT TT1.rnum as num
                    ,tt1.user_id
-                   ,first_name
-                   ,last_name
-                   ,birth_date
-                   ,email
-                   ,user_ph_num
+                   ,tt1.user_pwd
+                   ,tt1.first_name
+                   ,tt1.last_name
+                   ,tt1.birth_date
+                   ,tt1.email
+                   ,tt1.user_ph_num
                    ,CASE WHEN TO_CHAR(SYSDATE,'YYYYMMDD')=TO_CHAR(tt1.join_date,'YYYYMMDD') THEN TO_CHAR(tt1.join_date,'HH24:MI')
                             ELSE TO_CHAR(tt1.join_date,'YYYY/MM/DD')
                         END join_date
