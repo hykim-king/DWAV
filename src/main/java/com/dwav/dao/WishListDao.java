@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.pcwk.domain.WishListVO;;
+import com.dwav.vo.WishListVO;
+
+
 
 public interface WishListDao {
 	

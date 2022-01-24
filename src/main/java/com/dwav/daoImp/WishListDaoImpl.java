@@ -1,4 +1,4 @@
-package com.dwav.dao;
+package com.dwav.daoImp;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +18,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.domain.WishListVO;
+import com.dwav.dao.WishListDao;
+import com.dwav.vo.WishListVO;
 import com.sun.mail.imap.protocol.Namespaces.Namespace;
 
 @Repository

@@ -1,4 +1,4 @@
-package com.pcwk.domain;
+package com.dwav.vo;
 
 
 public class ReviewVO {	
