@@ -4,55 +4,99 @@ public class FacilitiesVO {
 	int amen_id;
 	int accom_id;
 	String amenity_type;
-	String amenity_value;
+	String amenity_val;
 	
-	public FacilitiesVO(int i, String string)
-	{
-		
-	}
+	/** default 생성자 */
+	public FacilitiesVO() {}
 
-	@Override
-	public String toString() {
-		return "AmenityVO [amen_id=" + amen_id + ", accom_id=" + accom_id + ", amenity_type=" + amenity_type + 
-				", amenity_value=" + amenity_value + "]";
-	}
-
+	
+	
+	
+	
 	public int getAmen_id() {
 		return amen_id;
 	}
 
 
-	public FacilitiesVO(int accom_id, String amenity_type, String amenity_value) {
-		super();
-		this.amen_id = -1; //dummy, DB fill it by Sequence : AMEN_ID_AUTOINC
-		this.accom_id = accom_id;
-		this.amenity_type = amenity_type;
-		this.amenity_value = amenity_value;
+
+
+
+	public void setAmen_id(int amen_id) {
+		this.amen_id = amen_id;
 	}
 
-	public String getAmenity_value() {
-		return amenity_value;
-	}
 
-	public void setAmenity_value(String amenity_value) {
-		this.amenity_value = amenity_value;
-	}
+
+
 
 	public int getAccom_id() {
 		return accom_id;
 	}
 
+
+
+
+
 	public void setAccom_id(int accom_id) {
 		this.accom_id = accom_id;
 	}
+
+
+
+
 
 	public String getAmenity_type() {
 		return amenity_type;
 	}
 
+
+
+
+
 	public void setAmenity_type(String amenity_type) {
 		this.amenity_type = amenity_type;
 	}
-	
+
+
+
+
+
+	public String getAmenity_val() {
+		return amenity_val;
+	}
+
+
+
+
+
+	public void setAmenity_val(String amenity_val) {
+		this.amenity_val = amenity_val;
+	}
+
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "FacilitiesVO [amen_id=" + amen_id + ", accom_id=" + accom_id + ", amenity_type=" + amenity_type
+				+ ", amenity_val=" + amenity_val + ", toString()=" + super.toString() + "]";
+	}
+
+
+
+
+
+	public FacilitiesVO(int amen_id, int accom_id, String amenity_type, String amenity_val) {
+		super();
+		this.amen_id = amen_id; //dummy, DB fill it by Sequence : AMEN_ID_AUTOINC
+		this.accom_id = accom_id;
+		this.amenity_type = amenity_type;
+		this.amenity_val = amenity_val;
+	}
+
 	
 }

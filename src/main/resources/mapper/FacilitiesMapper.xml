@@ -11,23 +11,155 @@
 <!-- 	<select id="getUser" parameterType="String" resultMap="UserVOResultMap"> -->
 <!-- 		select userid myId, name myName, gender myGender, city myCity from users where userid=#{value} -->
 <!-- 	</select> -->
-	<select id="getAmenityListByAccomId" resultType="FacilitiesVO">
-		select * from Facilities where accom_id = #{accom_id}
-	</select>
-	<insert id="insertAmenity" parameterType="FacilitiesVO" >
-		INSERT INTO facilities (
-			amen_id,
-			accom_id,
-			amenity_type,
-   		    amenity_value
-		) VALUES (
-			#{amen_id       },
-			#{accom_id      },
-			#{amenity_type  },
-   		    #{amenity_value }
-		)
+
+
+    
+
+    <!-- 수정 -->
+<update id="doUpdateAmen">
+		UPDATE facilities
+		SET
+		      accom_id     = #{accom_id}
+		     ,amenity_type = #{amenity_type}
+		     ,amenity_val  = #{amenity_val} 
+		WHERE amen_id      = #{amen_id}     
+</update>
+
+	<!-- 생성 -->
+	<!-- amen_id를 시퀀스로 -->
+	<insert id="doInsertAmen" parameterType="FacilitiesVO" >
+        INSERT INTO facilities (
+            amen_id,
+            accom_id,
+            amenity_type,
+            amenity_val
+        ) VALUES (
+            #{amen_id},
+            #{accom_id},
+            #{amenity_type},
+            #{amenity_val}
+        )
 	</insert>
-	<delete id="deleteAmenityListByAccomId">
-		delete from Facilities where accom_id = #{value}
+	
+	
+	
+	<!-- 삭제 -->
+	<delete id="deleteAllAmen">
+        DELETE FROM facilities
 	</delete>
+	
+	<delete id="deleteAmenAccom">
+		delete from facilities
+		where 
+		accom_id = #{accom_id}
+	</delete>
+	
+	<delete id="doDeleteAmen">
+		delete from facilities
+		where 
+		amen_id = #{amen_id}
+	</delete>
+	
+	
+	
+	
+	<!-- 조회 -->
+	
+	    <!-- 전체 조회 -->
+    <select id="getAllAmen" resultType="FacilitiesVO">
+        SELECT
+              amen_id,
+              accom_id, 
+              amenity_type, 
+              amenity_val
+        FROM
+            facilities
+    </select>
+	
+    <select id="doSelectAmen" resultType="FacilitiesVO">
+        select 
+              amen_id,
+              accom_id, 
+              amenity_type, 
+              amenity_val
+        from 
+              facilities 
+        where 
+               amen_id = #{amen_id}
+    </select>
+	
+	<sql id="searchAmenCondition">
+        <!-- WHERE엘리멘트는 태그에 의해 컨텐츠가 리턴되면 단순히 "WHERE"만을 추가한다. 게다가 AND, OR로 시작하면 
+            AND나 OR을 지워버린다. -->
+        <!-- amen_id, accom_id, amenity_type, amenity_val -->
+        <where>
+            <choose>
+            <when test=" '10' == searchDiv and '' != searchWord ">
+                    amen_id LIKE '%'||#{searchWord}||'%'
+                </when>
+            <when test=" '20' == searchDiv and '' != searchWord  ">
+                    accom_id LIKE '%'||#{searchWord}||'%'
+                </when>
+            <when test=" '30' == searchDiv and '' != searchWord  ">
+                    amenity_type LIKE '%'||#{searchWord}||'%'
+                </when>
+            <when test=" '40' == searchDiv and '' != searchWord  ">
+                    amenity_val LIKE '%'||#{searchWord}||'%'
+                </when>
+            </choose>
+        </where>
+    </sql>
+	
+	<select id="doRetrieveAmen" parameterType="SearchVO"
+        resultType="FacilitiesVO">
+		select A.*, B.*     
+		from
+		    (
+		    select 
+		            TT1.rnum as num
+		            ,tt1.accom_id
+		            ,tt1.amenity_type
+		            ,tt1.amenity_val
+		    
+		    from(
+		        select rownum rnum, t1.*
+		        from(
+		            select *
+		            from facilities 
+		            --검색조건
+		            <include refid="searchAmenCondition"/>
+		            )t1
+		        )tt1
+		        --paging
+		        where rnum between #{pageSize}*(#{pageNum}-1)+1 and #{pageSize}*(#{pageNum}-1)+#{pageSize}
+		    )A
+		    cross join
+		    (
+		        select count(*) total_cnt
+		        from facilities
+		        --검색 조건
+		        <include refid="searchAmenCondition"/>
+		    )B
+	</select>
+	
+	
+	    <!-- 총 회원 수 namespace+id --> 
+    <select id="getCountAmen" resultType="int">
+        SELECT COUNT(*) cnt
+        FROM facilities
+    </select>
+	
+	    <select id="findAccom" parameterType="FacilitiesVO" resultType="FacilitiesVO">
+        select 
+              amen_id,
+              accom_id, 
+              amenity_type, 
+              amenity_val
+        from 
+              facilities 
+        where 
+               accom_id = #{accom_id}
+    
+    </select>
+	
 </mapper>
