@@ -18,7 +18,7 @@ import com.dwav.vo.ImageVO;
 
 
 @Repository
-public class ImageDAOImp implements ImageDao {
+public class ImageDaoImp implements ImageDao {
 
 	 final Logger  LOG = LogManager.getLogger(getClass());
 
