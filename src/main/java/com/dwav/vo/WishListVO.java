@@ -13,9 +13,9 @@ public class WishListVO {
 
 	private int homeRule;
 	
-	private String homeIdx;
+	private int homeIdx;
 	
-	private String userId;
+	private int userId;
 
 	/**
 	 * @return the listIdx
@@ -118,40 +118,40 @@ public class WishListVO {
 	/**
 	 * @return the homeIdx
 	 */
-	public String getHomeIdx() {
+	public int getHomeIdx() {
 		return homeIdx;
 	}
 
 	/**
 	 * @param homeIdx the homeIdx to set
 	 */
-	public void setHomeIdx(String homeIdx) {
+	public void setHomeIdx(int homeIdx) {
 		this.homeIdx = homeIdx;
 	}
 
 	/**
 	 * @return the userId
 	 */
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
-		return "wishList [listIdx=" + listIdx + ", homeImage=" + homeImage + ", checkIn=" + checkIn + ", checkOut="
+		return "WishListVO [listIdx=" + listIdx + ", homeImage=" + homeImage + ", checkIn=" + checkIn + ", checkOut="
 				+ checkOut + ", homeType=" + homeType + ", homeFacility=" + homeFacility + ", homeRule=" + homeRule
 				+ ", homeIdx=" + homeIdx + ", userId=" + userId + "]";
 	}
 
 	public WishListVO(int listIdx, String homeImage, String checkIn, String checkOut, String homeType, int homeFacility,
-			int homeRule, String homeIdx, String userId) {
+			int homeRule, int homeIdx, int userId) {
 		super();
 		this.listIdx = listIdx;
 		this.homeImage = homeImage;
@@ -164,7 +164,7 @@ public class WishListVO {
 		this.userId = userId;
 	}
 
+		
+	
 	
 	}
-
-	
