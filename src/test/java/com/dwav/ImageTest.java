@@ -21,8 +21,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.dwav.dao.HomeDao;
 import com.dwav.dao.ImageDao;
+<<<<<<< HEAD
 import com.dwav.vo.HomeVO;
+=======
+>>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 import com.dwav.vo.ImageVO;
+
 
 
 @WebAppConfiguration

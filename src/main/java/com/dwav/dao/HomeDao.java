@@ -8,6 +8,10 @@ import com.dwav.vo.SearchVO;
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 public interface HomeDao {
 	
 	
@@ -74,6 +78,20 @@ public interface HomeDao {
 	 * @return List<HomeVO>
 	 * @throws SQLException
 	 */
+<<<<<<< HEAD
+=======
+	List<HomeVO>  RetrieveHome(SearchVO inVO)throws SQLException;
+	
+	
+	/**
+	 * 지역, 부킹가능날짜, 인원수
+	 * @param location
+	 * @param startDate
+	 * @param endDate
+	 * @param numberOfPeople
+	 * @return
+	 */
+>>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 	List<HomeVO> getHomeListBySearchBar(String location, String startDate, String endDate, int numberOfPeople);
     
     

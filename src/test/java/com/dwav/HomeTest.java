@@ -23,8 +23,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.dwav.dao.HomeDao;
 import com.dwav.vo.HomeVO;
+import com.dwav.vo.SearchVO;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 @RunWith(SpringJUnit4ClassRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -42,10 +47,18 @@ public class HomeTest {
 	HomeVO home02;
 	HomeVO home03;
 	
+<<<<<<< HEAD
 	
 	
 	@Before
 	public void setup()throws Exception {
+=======
+	SearchVO  search;
+	
+	@Before
+	public void setup()throws Exception {
+		search = new SearchVO("", "", 10, 1);
+>>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 		LOG.debug("1====================");
 		LOG.debug("1=context="+context);
 		LOG.debug("1=dao="+dao);
@@ -182,6 +195,15 @@ public class HomeTest {
 		}
 	}
 	
+	@Test
+	public void RetrieveHome()throws SQLException{
+		search.setPageNum(1);
+		search.setPageSize(20);
+		search.setSearchDiv("20");
+		search.setSearchWord("서울");
+		List<HomeVO> list = dao.RetrieveHome(search);
+		assertEquals(3, list.size());
+	}
 	
 	private void isSameHome(HomeVO outVO, HomeVO homeVO) {
 		

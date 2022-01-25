@@ -166,4 +166,27 @@ public class HomeDaoImple implements HomeDao {
 		return sqlSessionTemplate.selectList("getHomeListBySearchBar", parameters);
 		
 	}
+<<<<<<< HEAD
+=======
+
+
+	@Override
+	public List<HomeVO> RetrieveHome(SearchVO inVO) throws SQLException {
+		List<HomeVO> list =new ArrayList<HomeVO>();
+		
+		String statement = NAMESPACE + ".RetrieveHome";
+		LOG.debug("==============================");
+		LOG.debug("=param="+inVO.toString());		
+		LOG.debug("=statement="+statement);		
+		LOG.debug("==============================");
+		list = sqlSessionTemplate.selectList(statement, inVO);
+		
+		for(HomeVO vo :list) {
+			LOG.debug(vo);
+		}
+		
+		return list;
+	}
+	
+>>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 }

@@ -153,6 +153,71 @@
 		and accomodates <![CDATA[>=]]> #{numpeople}
 		and location like '%'||#{location}||'%'
 	</select>
+<<<<<<< HEAD
+=======
 	
+	<sql id="searchCondition">
+   <where>
+      <choose>
+         <when test=" '' != searchWord and  '10'== searchDiv">
+             room_type  '%'|| #{searchWord} || '%'
+         </when>
+         
+         <when test=" '' != searchWord and  '20'== searchDiv">
+             location LIKE  '%'|| #{searchWord} || '%'
+         </when> 
+         <when test=" '' != searchWord and  '30'== searchDiv">
+             building_type LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+         <when test=" '' != searchWord and  '40'== searchDiv">
+             property_type LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+         <when test=" '' != searchWord and  '50'== searchDiv">
+             price LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+         <when test=" '' != searchWord and  '60'== searchDiv">
+             accomodates LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+      </choose>
+   </where>
+   
+	</sql>
+>>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
+	
+	<select id="RetrieveHome" parameterType="SearchVO" resultType="HomeVO" >
+			SELECT A.*,B.*
+		FROM(SELECT accom_id
+				,room_type
+				,beds
+				,building_type
+				,location
+				,property_type
+				,price
+				,accomodates
+				,bathrooms
+				,bedrooms
+				,descrption
+				,host_id
+				,name
+			FROM(SELECT ROWNUM rnum, T1.*
+				FROM(SELECT *
+					FROM home
+					--검색조건 : 등록
+					<include refid="searchCondition"/>
+					ORDER BY location
+					)t1
+				)tt1
+				WHERE rnum BETWEEN #{pageSize} * (#{pageNum} -1 ) +1 AND #{pageSize} * (#{pageNum} -1 ) + #{pageSize}
+			    --WHERE rnum BETWEEN 1 AND 10	
+		)A
+		CROSS JOIN
+		(
+		SELECT COUNT(*) total_cnt
+		FROM home
+		--검색조건
+		<include refid="searchCondition"/>
+		
+		)B
+	</select>
 	
 </mapper>
