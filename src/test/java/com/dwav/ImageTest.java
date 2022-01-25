@@ -2,21 +2,26 @@ package com.dwav;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.dwav.dao.ImageDAO;
+import com.dwav.dao.HomeDao;
+import com.dwav.dao.ImageDao;
+import com.dwav.vo.HomeVO;
 import com.dwav.vo.ImageVO;
 
 
@@ -28,35 +33,46 @@ import com.dwav.vo.ImageVO;
 public class ImageTest {
 	final Logger  LOG = LogManager.getLogger(getClass());
 	
+	
 	@Autowired
-	ImageDAO idao;
+    ApplicationContext  context;
 	
-	@Test
-	public void test1() {
-		LOG.debug("addImage() INSERTED ROWS : " + idao.addImage(new ImageVO(1, "Path/to/image2.png")));
-	}
-	@Test
-	public void test2() {
-		List<ImageVO> imgList = new ArrayList<>();
-		imgList.add(new ImageVO(1, "my/path/to/dest"));
-		imgList.add(new ImageVO(1, "Test/path"));
-		LOG.debug("addImageList() INSERTED ROWS : " + idao.addImageList(imgList));
-	}
+	@Autowired
+	ImageDao dao;
 	
-	
-	@Test
-	public void test3() {
-		LOG.debug("getImageList() Result : ");
-		List<ImageVO> imageList = idao.getImageByAccomId(1);
-		for (ImageVO imageVO : imageList) {
-			LOG.debug(imageVO);
-		}
-	}
-	
-	
-	@Test
-	public void test4() {
-		LOG.debug("deleteImageByImageId() AFFECTED ROWS :  : " +  idao.deleteImageByImageId(1));
-	}
+	ImageVO imgvo01;
+	ImageVO imgvo02;
+	ImageVO imgvo03;
 
+	
+	@Before
+	public void setup()throws Exception {
+		LOG.debug("1====================");
+		LOG.debug("1=context="+context);
+		LOG.debug("1=dao="+dao);
+		LOG.debug("1====================");
+	
+		imgvo01 = new ImageVO(1,1, "web-file");
+		
+		assertNotNull(context);
+		assertNotNull(dao);
+		
+	}
+	
+	@Test
+//	@Ignore
+	public void addAndGet() throws SQLException{
+		LOG.debug("====================");
+		LOG.debug("=====addAndGet======");
+		LOG.debug("====================");
+		
+		dao.deleteImgAll();
+		
+		dao.InsertImg(imgvo01);
+		dao.SelectImg(imgvo01);
+		dao.DeleteImg(imgvo01);
+	}
+	
+	
+	
 }

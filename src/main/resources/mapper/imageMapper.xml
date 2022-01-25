@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dwav">
+<mapper namespace="mapper.imageMapper">
 <!-- aliasing 맵핑 -->
 <!-- 	<resultMap type="UserVO" id="UserVOResultMap"> -->
 <!-- 		<id property="userid" column="myId" javaType="String" jdbcType="VARCHAR"/> -->
@@ -11,10 +11,14 @@
 <!-- 	<select id="getUser" parameterType="String" resultMap="UserVOResultMap"> -->
 <!-- 		select userid myId, name myName, gender myGender, city myCity from users where userid=#{value} -->
 <!-- 	</select> -->
-	<select id="getImageListByAccomId" resultType="ImageVO">
-		select * from image where accom_id=#{value}
+	
+	<select id="SelectImg" parameterType="ImageVO" resultType="ImageVO">
+		select *
+		from image
+		WHERE accom_id = #{accom_id}
 	</select>
-	<insert id="insertImage" parameterType="ImageVO">
+		
+	<insert id="InsertImg" parameterType="ImageVO">
 		INSERT INTO image (
 			image_id,
 			accom_id,
@@ -25,7 +29,10 @@
 			#{path    }
 		)
 	</insert>
-	<delete id="deleteImageByImageId" parameterType="ImageVO">
-		delete from image where image_id = #{image_id} 
+	<delete id="deleteImgAll" parameterType="ImageVO">
+		delete from image 
+	</delete>
+	<delete id="DeleteImg" parameterType="ImageVO">
+		DELETE FROM image WHERE accom_id = #{accom_id}
 	</delete>
 </mapper>

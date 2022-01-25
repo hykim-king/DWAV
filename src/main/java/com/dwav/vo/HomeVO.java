@@ -2,287 +2,176 @@ package com.dwav.vo;
 
 public class HomeVO {
 	
-	int accom_id;
-	int accomodates;
-	int bathrooms;
-	int bedrooms;
-	int beds;
-	String building_type;
-	String currency_unit;
-	String descrption;
-	String host_id;
-	String location;
-	String name;
-	float price;
-	String property_type;
-	String room_type;
-	float avg_point;
+	private int    Accom_Id	       ;
+	private int    Accomodates	   ;
+	private int    Bathrooms	   ;
+	private int    Bedrooms	       ;
+	private String Descrption	   ;
+	private String Host_Id	       ;
+	private String Location	       ;
+	private int    Price	       ;
+	private String Property_Type   ;
+	private String Room_Type	   ;
+	private int    Beds	           ;
+	private String Building_Type   ;
+	private String Currency_Unit   ;
+	private String Name	           ;
+	private int    Avg_Point	   ;
 	
 	public HomeVO(){}
-	
-	
-	
-	public HomeVO(int accom_id, int accomodates, int bathrooms, int bedrooms, int beds, String building_type,
-			String currency_unit, String description, String host_id, String location, String name, float price,
-			String property_type, String room_type, float avg_point) {
+
+	public HomeVO(int accom_Id, int accomodates, int bathrooms, int bedrooms, String descrption, String host_Id,
+			String location, int price, String property_Type, String room_Type, int beds, String building_Type,
+			String currency_Unit, String name, int avg_Point) {
 		super();
-		this.accom_id = accom_id;
-		this.accomodates = accomodates;
-		this.bathrooms = bathrooms;
-		this.bedrooms = bedrooms;
-		this.beds = beds;
-		this.building_type = building_type;
-		this.currency_unit = currency_unit;
-		this.descrption = descrption;
-		this.host_id = host_id;
-		this.location = location;
-		this.name = name;
-		this.price = price;
-		this.property_type = property_type;
-		this.room_type = room_type;
-		this.avg_point = avg_point;
+		Accom_Id = accom_Id;
+		Accomodates = accomodates;
+		Bathrooms = bathrooms;
+		Bedrooms = bedrooms;
+		Descrption = descrption;
+		Host_Id = host_Id;
+		Location = location;
+		Price = price;
+		Property_Type = property_Type;
+		Room_Type = room_Type;
+		Beds = beds;
+		Building_Type = building_Type;
+		Currency_Unit = currency_Unit;
+		Name = name;
+		Avg_Point = avg_Point;
 	}
 
-
-
-	
-
-
-
-
-	public HomeVO(int accomodates, int bathrooms, int bedrooms, int beds, String building_type,
-			String currency_unit, String description, String host_id, String location, String name, float price,
-			String property_type, String room_type) {
-		super();
-		this.accom_id = -1; // 
-		this.accomodates = accomodates;
-		this.bathrooms = bathrooms;
-		this.bedrooms = bedrooms;
-		this.beds = beds;
-		this.building_type = building_type;
-		this.currency_unit = currency_unit;
-		this.descrption = descrption;
-		this.host_id = host_id;
-		this.location = location;
-		this.name = name;
-		this.price = price;
-		this.property_type = property_type;
-		this.room_type = room_type;
-		this.avg_point = 0.0f;
+	public int getAccom_Id() {
+		return Accom_Id;
 	}
 
-
-
-
-	public Integer getAccom_id() {
-		return accom_id;
+	public void setAccom_Id(int accom_Id) {
+		Accom_Id = accom_Id;
 	}
 
-
-
-	public void setAccom_id(Integer accom_id) {
-		this.accom_id = accom_id;
+	public int getAccomodates() {
+		return Accomodates;
 	}
-
-
-
-	public String getRoom_type() {
-		return room_type;
-	}
-
-
-
-	public void setRoom_type(String room_type) {
-		this.room_type = room_type;
-	}
-
-
-
-	public Integer getAccomodates() {
-		return accomodates;
-	}
-
-
-
-	public void setAccomodates(Integer accomodates) {
-		this.accomodates = accomodates;
-	}
-
-
-
-	public String getProperty_type() {
-		return property_type;
-	}
-
-
-
-	public void setProperty_type(String property_type) {
-		this.property_type = property_type;
-	}
-
-
-
-	public String getBuilding_type() {
-		return building_type;
-	}
-
-
-
-	public void setBuilding_type(String building_type) {
-		this.building_type = building_type;
-	}
-
-
-
-	public Integer getBedrooms() {
-		return bedrooms;
-	}
-
-
-
-	public void setBedrooms(Integer bedrooms) {
-		this.bedrooms = bedrooms;
-	}
-
-
-
-	public Integer getBeds() {
-		return beds;
-	}
-
-
-
-	public void setBeds(Integer beds) {
-		this.beds = beds;
-	}
-
-
-
-	public Integer getBathrooms() {
-		return bathrooms;
-	}
-
-
-
-	public void setBathrooms(Integer bathrooms) {
-		this.bathrooms = bathrooms;
-	}
-
-
-
-
-
-	public String getLocation() {
-		return location;
-	}
-
-
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-
-
-	public String getCurrency_unit() {
-		return currency_unit;
-	}
-
-
-
-	public void setCurrency_unit(String currency_unit) {
-		this.currency_unit = currency_unit;
-	}
-
-
-
-	public String getDescription() {
-		return descrption;
-	}
-
-
-
-	public void setDescription(String description) {
-		this.descrption = description;
-	}
-
-
-
-	public String getHost_id() {
-		return host_id;
-	}
-
-
-
-	public void setHost_id(String host_id) {
-		this.host_id = host_id;
-	}
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-	public float getPrice() {
-		return price;
-	}
-
-
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-
-
-	public float getAvg_point() {
-		return avg_point;
-	}
-
-
-
-	public void setAvg_point(float avg_point) {
-		this.avg_point = avg_point;
-	}
-
-
-
-	public void setAccom_id(int accom_id) {
-		this.accom_id = accom_id;
-	}
-
-
 
 	public void setAccomodates(int accomodates) {
-		this.accomodates = accomodates;
+		Accomodates = accomodates;
 	}
 
-
+	public int getBathrooms() {
+		return Bathrooms;
+	}
 
 	public void setBathrooms(int bathrooms) {
-		this.bathrooms = bathrooms;
+		Bathrooms = bathrooms;
 	}
 
-
+	public int getBedrooms() {
+		return Bedrooms;
+	}
 
 	public void setBedrooms(int bedrooms) {
-		this.bedrooms = bedrooms;
+		Bedrooms = bedrooms;
 	}
 
+	public String getDescrption() {
+		return Descrption;
+	}
 
+	public void setDescrption(String descrption) {
+		Descrption = descrption;
+	}
+
+	public String getHost_Id() {
+		return Host_Id;
+	}
+
+	public void setHost_Id(String host_Id) {
+		Host_Id = host_Id;
+	}
+
+	public String getLocation() {
+		return Location;
+	}
+
+	public void setLocation(String location) {
+		Location = location;
+	}
+
+	public int getPrice() {
+		return Price;
+	}
+
+	public void setPrice(int price) {
+		Price = price;
+	}
+
+	public String getProperty_Type() {
+		return Property_Type;
+	}
+
+	public void setProperty_Type(String property_Type) {
+		Property_Type = property_Type;
+	}
+
+	public String getRoom_Type() {
+		return Room_Type;
+	}
+
+	public void setRoom_Type(String room_Type) {
+		Room_Type = room_Type;
+	}
+
+	public int getBeds() {
+		return Beds;
+	}
 
 	public void setBeds(int beds) {
-		this.beds = beds;
+		Beds = beds;
 	}
+
+	public String getBuilding_Type() {
+		return Building_Type;
+	}
+
+	public void setBuilding_Type(String building_Type) {
+		Building_Type = building_Type;
+	}
+
+	public String getCurrency_Unit() {
+		return Currency_Unit;
+	}
+
+	public void setCurrency_Unit(String currency_Unit) {
+		Currency_Unit = currency_Unit;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public int getAvg_Point() {
+		return Avg_Point;
+	}
+
+	public void setAvg_Point(int avg_Point) {
+		Avg_Point = avg_Point;
+	}
+
+	@Override
+	public String toString() {
+		return "HomeVO [Accom_Id=" + Accom_Id + ", Accomodates=" + Accomodates + ", Bathrooms=" + Bathrooms
+				+ ", Bedrooms=" + Bedrooms + ", Descrption=" + Descrption + ", Host_Id=" + Host_Id + ", Location="
+				+ Location + ", Price=" + Price + ", Property_Type=" + Property_Type + ", Room_Type=" + Room_Type
+				+ ", Beds=" + Beds + ", Building_Type=" + Building_Type + ", Currency_Unit=" + Currency_Unit + ", Name="
+				+ Name + ", Avg_Point=" + Avg_Point + ", toString()=" + super.toString() + "]";
+	}
+
+
+
 
 
 	
