@@ -1,4 +1,4 @@
-package com.pcwk.domain;
+package com.dwav.vo;
 
 public class WishListVO {
 	
@@ -13,9 +13,9 @@ public class WishListVO {
 
 	private int homeRule;
 	
-	private Number homeIdx;
+	private int homeIdx;
 	
-	private Number userId;
+	private int userId;
 
 	/**
 	 * @return the listIdx
@@ -118,28 +118,28 @@ public class WishListVO {
 	/**
 	 * @return the homeIdx
 	 */
-	public Number getHomeIdx() {
+	public int getHomeIdx() {
 		return homeIdx;
 	}
 
 	/**
 	 * @param homeIdx the homeIdx to set
 	 */
-	public void setHomeIdx(Number homeIdx) {
+	public void setHomeIdx(int homeIdx) {
 		this.homeIdx = homeIdx;
 	}
 
 	/**
 	 * @return the userId
 	 */
-	public Number getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(Number userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -151,7 +151,7 @@ public class WishListVO {
 	}
 
 	public WishListVO(int listIdx, String homeImage, String checkIn, String checkOut, String homeType, int homeFacility,
-			int homeRule, Number homeIdx, Number userId) {
+			int homeRule, int homeIdx, int userId) {
 		super();
 		this.listIdx = listIdx;
 		this.homeImage = homeImage;
@@ -163,10 +163,8 @@ public class WishListVO {
 		this.homeIdx = homeIdx;
 		this.userId = userId;
 	}
-	
+
+		
 	
 	
 	}
-
-
-	
