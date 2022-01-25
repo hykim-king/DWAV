@@ -1,115 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dwav">
+<mapper namespace="mapper.HomeMapper">
 
-	<select id="getHomeByHomeId" resultType="HomeVO">
-		select * from home where accom_id=#{value}
+	<select id="getAllHome" parameterType="HomeVO" resultType="HomeVO">
+		SELECT * FROM home
 	</select>
 	
-	<select id="getHomeByHostId" resultType="HomeVO">
-		select * from home where host_id=#{host_id}	
+	<resultMap type="HomeVO" id="homeResultMap">
+		<id property="Accom_Id"           column="Accom_Id"/>
+		<result property="Accomodates"    column="Accomodates"/>
+		<result property="bathrooms"      column="bathrooms"/>
+		<result property="bedrooms"       column="bedrooms"/>
+		<result property="descrption"     column="descrption"/>
+		<result property="Host_Id"        column="host_Id"/>
+		<result property="location"       column="location"/>
+		<result property="price"          column="price"/>
+		<result property="Property_Type"  column="property_Type"/>
+		<result property="Room_Type"      column="room_Type"/>
+		<result property="Beds"           column="beds"/>
+		<result property="Building_Type"  column="building_Type"/>
+		<result property="Currency_Unit"  column="Currency_Unit"/>
+		<result property="Name"           column="Name"/>
+		<result property="Avg_Point"      column="Avg_Point"/>
+
+	</resultMap>
+	
+	
+	
+	<select id="SelectHome" parameterType="HomeVO" resultMap="homeResultMap">
+	   <![CDATA[ 
+	    SELECT
+			accom_id,
+			accomodates,
+			bathrooms,
+			bedrooms,
+			descrption,
+			host_id,
+			location,
+			price,
+			property_type,
+			room_type,
+			beds,
+			building_type,
+			currency_unit,
+			name,
+			avg_point
+		FROM home
+		WHERE Accom_Id = #{Accom_Id}   ]]>
 	</select>
 	
-  	<insert id="insertHome" parameterType="HomeVO">
+	<select id="getHomeCount" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM home
+	</select>
+	
+	<select id="locationLike" parameterType="HomeVO" resultType="HomeVO">
+			SELECT
+			    accom_id,
+			    accomodates,
+			    bathrooms,
+			    bedrooms,
+			    descrption,
+			    host_id,
+			    location,
+			    price,
+			    property_type,
+			    room_type,
+			    beds,
+			    building_type,
+			    currency_unit,
+			    name,
+			    avg_point
+			FROM
+			    home
+			WHERE location = #{location}
+    
+	</select>
+	
+  	<insert id="InsertHome" parameterType="HomeVO">
 		INSERT INTO home (
 			accomodates,
 			bathrooms,
 			bedrooms,
-			beds,
-			building_type,
-			currency_unit,
 			descrption,
-			host_id,
+			host_Id,
 			location,
-			name,
 			price,
-			property_type,
-			room_type
+			property_Type,
+			room_Type,
+			beds,
+			building_Type,
+			currency_Unit,
+			name,
+			avg_point
 		) VALUES (
-			#{accomodates   },
-			#{bathrooms     },
-			#{bedrooms      },
-			#{beds          },
-			#{building_type ,jdbcType=VARCHAR},
-			#{currency_unit ,jdbcType=VARCHAR},
-			#{descrption    ,jdbcType=VARCHAR},
-			#{host_id       },
-			#{location      ,jdbcType=VARCHAR},
-			#{name          ,jdbcType=VARCHAR},
-			#{price         },
-			#{property_type ,jdbcType=VARCHAR},
-			#{room_type     ,jdbcType=VARCHAR}
+			#{accomodates},
+			#{bathrooms},
+			#{bedrooms},
+			#{descrption},
+			#{host_Id},
+			#{location},
+			#{price},
+			#{property_Type},
+			#{room_Type},
+			#{beds},
+			#{building_Type},
+			#{Currency_Unit},
+			#{Name},
+			#{Avg_Point}
 		)
         
 	</insert> 
 	
-   <delete id="deleteAllHome" parameterType="HomeVO">
-        DELETE from home
- ` </delete>
+ 	<delete id="deleteHomeAll" parameterType="HomeVO">
+ 		delete from home
+ 	</delete>
 	
-	<delete id="deleteHome" parameterType="HomeVO">
-		delete from home where accom_id = #{value}
+	<delete id="DeleteHome" parameterType="HomeVO">
+		delete from home where accom_id = #{accom_Id}
 	</delete>
 	
-	<update id="updateHome" parameterType="HomeVO">
-		update home set accomodates = #{accomodates                           },
-						bathrooms   = #{bathrooms                             },
-						bedrooms    = #{bedrooms 					       	  },
-						descrption  = #{descrption       ,jdbcType=VARCHAR    }, 
-						host_id = #{host_id              ,jdbcType=VARCHAR    }, 
-						location = #{location            ,jdbcType=VARCHAR    }, 
-						price = #{price                                       },
-						property_type = #{property_type  ,jdbcType=VARCHAR    }, 
-						room_type = #{room_type          ,jdbcType=VARCHAR    }, 
-						beds = #{beds				   					      }, 
-						building_type = #{building_type  ,jdbcType=VARCHAR    }, 
-						currency_unit = #{currency_unit  ,jdbcType=VARCHAR    },
-						name = #{name                    ,jdbcType=VARCHAR    }, 
-						avg_point = #{avg_point                               }
-		where accom_id = #{accom_id} 
+	<update id="UpdateHome" parameterType="HomeVO" >
+		UPDATE home
+		SET
+			accomodates   =  #{accomodates    },
+			bathrooms     =  #{bathrooms      },
+			bedrooms      =  #{bedrooms       },
+			descrption    =  #{descrption     },
+			host_id       =  #{Host_Id        },
+			location      =  #{location       },
+			price         =  #{price          },
+			property_type =  #{property_Type  },
+			room_type     =  #{Room_Type      },
+			beds          =  #{beds           },
+			building_type =  #{Building_Type  },
+			currency_unit =  #{Currency_Unit  },
+			name          =  #{name           },
+			avg_point     =  #{Avg_Point      }
+			
+		where accom_id = #{accom_Id} 
 	</update>
 	
 	<select id="getHomeListBySearchBar" parameterType="hashmap" resultType="HomeVO">
-		
-		SELECT
-			 z.location         ={location         }
-			,z.accom_id         ={accom_id         }
-			,z.host_id          ={host_id          }
-			,z.descrption       ={descrption       }
-			,z.accomodates      ={accomodates      }
-			,y.reserv_date      ={reserv_date      }
-			,y.accom_id         ={accom_id         }
-			,x.end_date         ={end_date         }
-			,x.state_date       ={state_date       }
-			,x.price            ={price            }
-			,x.number_of_people ={number_of_people }
-		FROM
-			bookingdate y,
-			booking     x,
-			home        z
-		WHERE
-				x.reserv_id = y.reserv_id
-			AND z.accom_id  = y.accom_id
-			AND z.accom_id  = x.accom_id
-	</select>
-	
-	<select id="getHomeListBySearchBarUsingPriceFilter" parameterType="hashmap" resultType="HomeVO">
-		select * from home where not exists (
+		select * 
+		from home 
+		where not exists (
 			select distinct accom_id, rd_id, reserv_date 
-			from reserveddate 
+			from bookingdate 
 			where reserv_date between TO_DATE(#{startDate},'yyyy-MM-dd') 
 				and TO_DATE(#{endDate},'yyyy-MM-dd')
 		) 
+		and accomodates <![CDATA[>=]]> #{numpeople}
 		and location like '%'||#{location}||'%'
-		and accomodates <![CDATA[>=]]> #{numPeople}
-		and price <![CDATA[>=]]> #{startPrice}
-		and price<![CDATA[<=]]> #{endPrice}
 	</select>
 	
-
-	<select id="checkAccomId" resultType="int">
-		select ACCOM_ID_AUTOINC.CURRVAL from dual
-	</select>
+	<sql id="searchCondition">
+   <where>
+      <choose>
+         <when test=" '' != searchWord and  '10'== searchDiv">
+             room_type  '%'|| #{searchWord} || '%'
+         </when>
+         
+         <when test=" '' != searchWord and  '20'== searchDiv">
+             location LIKE  '%'|| #{searchWord} || '%'
+         </when> 
+         <when test=" '' != searchWord and  '30'== searchDiv">
+             building_type LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+         <when test=" '' != searchWord and  '40'== searchDiv">
+             property_type LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+         <when test=" '' != searchWord and  '50'== searchDiv">
+             price LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+         <when test=" '' != searchWord and  '60'== searchDiv">
+             accomodates LIKE  '%'|| #{searchWord} || '%'
+         </when>               
+      </choose>
+   </where>
+   
+	</sql>
 	
+	<select id="RetrieveHome" parameterType="SearchVO" resultType="HomeVO" >
+			SELECT A.*,B.*
+		FROM(SELECT accom_id
+				,room_type
+				,beds
+				,building_type
+				,location
+				,property_type
+				,price
+				,accomodates
+				,bathrooms
+				,bedrooms
+				,descrption
+				,host_id
+				,name
+			FROM(SELECT ROWNUM rnum, T1.*
+				FROM(SELECT *
+					FROM home
+					--검색조건 : 등록
+					<include refid="searchCondition"/>
+					ORDER BY location
+					)t1
+				)tt1
+				WHERE rnum BETWEEN #{pageSize} * (#{pageNum} -1 ) +1 AND #{pageSize} * (#{pageNum} -1 ) + #{pageSize}
+			    --WHERE rnum BETWEEN 1 AND 10	
+		)A
+		CROSS JOIN
+		(
+		SELECT COUNT(*) total_cnt
+		FROM home
+		--검색조건
+		<include refid="searchCondition"/>
+		
+		)B
+	</select>
 	
 </mapper>
