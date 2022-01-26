@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.HomeMapper">
+
+ <resultMap type="project" id="projectResultMap">
+        <id column="PNO" property="no" />
+        <result column="PNAME" property="title" />
+        <result column="CONTENT" property="content" />
+        <result column="STA_DATE" property="startDate" javaType="java.sql.Date" />
+        <result column="END_DATE" property="endDate" javaType="java.sql.Date" />
+        <result column="STATE" property="state" />
+        <result column="CRE_DATE" property="createdDate" javaType="java.sql.Date" />
+        <result column="TAGS" property="tags" />
+    </resultMap>
+
+<select id="homeImg" resultMap=homeResultMap>
+     SELECT homeImg, checkIn, checkOut, homeType, homeFacility, homeRule, homeIdx, userId
+     FROM wishList 
+  </select>
+  
+   <insert id="Insert" parameterType="UserVO">
+	 INSERT INTO hr_member (
+	     homeImg,              
+	     checkIn,              
+	     checkOut,            
+	     homeType,           
+	     homeFacility,             
+	     homeRule,         
+	     homeIdx,             
+	     userId             
+	 ) VALUES (             
+	     #{homeImg},                 
+	     #{checkIn},                 
+	     #{checkOut},                 
+	     #{homeType},                 
+	     #{homeFacility},                 
+	     #{homeRule},                 
+	     #{homeIdx},                 
+	     #{userId}            
+	 )                        
+  </insert>
+  
+  <select id="selectOne" parameterType="com.dwav.vo.WishListVO resultMap="wishListResultMap">
+  		select homeImg, checkIn, checkOut, homeType, homeFacility, homeRule, homeIdx, userId
+  		FROM wishList
+  		where homeImg=#{homeImg}
+  
+  <update id="update" parameterType="project">
+        update PROJECTS set
+            home_img = #{homeImg},
+            check_in = #{checkIn},
+            check_out = #{checkOut},
+            home_type = #{homeType},
+            home_facility = #{homeFacility},
+            home_rule = #{homeRule}
+            home_idx = #{home_idx}
+            user_id = #{user_id}
+            
+        where homeImg = #{homeImg}
+    </update>  
+ 
+ <delete id="delete" parameterType="int">
+        delete from wishList
+        where homeImg = #{homeImg}
+    </delete>
+  
+  </mapper>
