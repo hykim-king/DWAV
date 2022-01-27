@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 public class HomeController {
 
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
-	final String VIEW_NAME = "home/home_mng";
+	final String VIEW_NAME = "";
 	
 	@Autowired
 	HomeService homeService;
@@ -37,10 +37,12 @@ public class HomeController {
 	
 	//Rest VIEW
 	//http://localhost:8080/ehr/home/json_view
-	@RequestMapping(value = "/json_view",method = RequestMethod.GET)
-	public String jsonView(Model model)throws SQLException{
-		
-		return "json/json_view";
+	@RequestMapping(value = "/home_view.do",method = RequestMethod.GET)
+	public String homeView()throws SQLException{
+		LOG.debug("======================");
+		LOG.debug("=homeView=");
+		LOG.debug("======================");			
+		return "home/home";
 	}
 	
 	
@@ -157,7 +159,7 @@ public class HomeController {
 	} 
 	
 	
-	@RequestMapping(value="/InsertHome.do" ,method = RequestMethod.POST
+	@RequestMapping(value="/InsertHome.do" ,method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //스프링에서 비동기 처리를 하는 경우,HTTP 요청의 분문 body 부분이 그대로 전달된다.
 	public String InsertHome(HomeVO inVO) throws SQLException {
