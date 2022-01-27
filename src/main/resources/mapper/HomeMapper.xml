@@ -153,8 +153,8 @@
 		and accomodates <![CDATA[>=]]> #{numpeople}
 		and location like '%'||#{location}||'%'
 	</select>
-<<<<<<< HEAD
-=======
+
+
 	
 	<sql id="searchCondition">
    <where>
@@ -182,7 +182,7 @@
    </where>
    
 	</sql>
->>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
+
 	
 	<select id="RetrieveHome" parameterType="SearchVO" resultType="HomeVO" >
 			SELECT A.*,B.*
