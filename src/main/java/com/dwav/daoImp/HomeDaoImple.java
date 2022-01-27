@@ -186,5 +186,4 @@ public class HomeDaoImple implements HomeDao {
 		return list;
 	}
 	
->>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 }

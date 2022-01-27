@@ -1,4 +1,4 @@
-package com.dwav.controller;
+package com.dwav;
 
 import java.io.File;
 import java.io.IOException;

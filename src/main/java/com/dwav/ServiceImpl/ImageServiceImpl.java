@@ -7,11 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-
-=======
 import com.dwav.dao.HomeDao;
->>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 import com.dwav.dao.ImageDao;
 import com.dwav.service.ImageService;
 import com.dwav.vo.ImageVO;

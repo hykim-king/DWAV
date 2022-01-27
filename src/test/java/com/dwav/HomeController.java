@@ -1,4 +1,4 @@
-package com.dwav.controller;
+package com.dwav;
 
 import java.sql.SQLException;
 import java.util.List;
