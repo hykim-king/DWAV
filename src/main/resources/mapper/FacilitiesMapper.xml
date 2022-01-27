@@ -85,7 +85,7 @@
         from 
               facilities 
         where 
-               amen_id = #{amen_id}
+               accom_id = #{accom_id}
     </select>
 	
 	<sql id="searchAmenCondition">

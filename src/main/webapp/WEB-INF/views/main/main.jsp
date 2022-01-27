@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%
+    String login_id = (String)session.getAttribute("login_id");
+%>
 <c:set var="CP"        value="${pageContext.request.contextPath}"/>
 <c:set var="resource"  value="/resources"/>  
 <c:set var="CP_RES"    value="${CP }${resource}" />
@@ -42,7 +45,7 @@
                location.href="searchInListFromMainGet.do?city="+$("#city").val()+"&startDate="+$("#datepicker1").val()+"&endDate="+$("#datepicker2").val()+"&person="+$("#personnel").val();
             }
          });
-         $("#datepicker1").datepicker({
+             $("#datepicker1").datepicker({
              dateFormat: 'yy-mm-dd'
          });      
          $("#datepicker2").datepicker({
@@ -100,14 +103,14 @@
          <c:when test="${msg == null}"> <!-- 로그인X -->
          
          <% 
-            if(id == null){
+            if(login_id == null){
          %>
          
          <div id="nomemberStatusWrapper">
             <div id="noMemberStatus">
                <a class="indexFont" href="host.jsp">호스트</a>
-               <a class="indexFont" href="join.jsp">회원가입</a>
-               <a class="indexFont" href="login.jsp">로그인</a>
+               <a class="indexFont" href="../user/user_reg.do">회원가입</a>
+               <a class="indexFont" href="../user/login_view.do">로그인</a>
             </div>
          </div>   
          <%
@@ -115,7 +118,7 @@
          %>
          <div id="memberStatusWrapper">
             <div id="memberStatus">
-               <p id="memberStatusFont"><%=id %>님 반갑습니다!</p>
+               <p id="memberStatusFont"><%=login_id %>님 반갑습니다!</p>
             </div>   
             <div id="tempImg">
                <h2 style="color:#fff;">&nbsp;&nbsp;메뉴</h2>
@@ -124,7 +127,7 @@
                     <a href="mypage.jsp" class="list-group-item list-group-item-action">마이 페이지</a>
                     <a href="gethomeList.do?userId=<%=id %>" class="list-group-item list-group-item-action">예약 리스트</a>
                     <a href="roomsList.jsp" class="list-group-item list-group-item-action">숙박지 리스트</a>
-                    <a href="logout.do" class="list-group-item list-group-item-action">로그아웃</a>
+                    <a href="../user/logout.do" class="list-group-item list-group-item-action">로그아웃</a>
                   </div>
                </div>
             </div>   
@@ -134,7 +137,7 @@
          <c:otherwise>
          <div id="memberStatusWrapper">
             <div id="memberStatus">
-               <p id="memberStatusFont"><%=id %>님 반갑습니다!</p>
+               <p id="memberStatusFont"><%=login_id %>님 반갑습니다!</p>
             </div>   
             <div id="tempImg">
                <h2 style="color:#fff;">&nbsp;&nbsp;메뉴</h2>
@@ -162,7 +165,7 @@
                   <p class="searchFont">위치</p>
                   <input type="text" id="city" name="city" value="모든 위치">
                </div>
-               <div id="datepickerDiv"/>
+               <div id="datepickerDiv">
                   <p class="searchFont">날짜</p>
                   <input type="text" id="datepicker1" name="startDate" value="체크인 날짜">
                   &nbsp;&nbsp;~&nbsp;&nbsp;

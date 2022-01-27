@@ -59,8 +59,6 @@
                 alert("비번을 입력 하세요.");
                 $("#user_pwd").focus();
                 return;
-                
-                
             }
             
             if(confirm("로그인 하시겠습니까?")==false)return;
@@ -88,7 +86,7 @@
                     //MainController.java
                     //main.jsp
                     //http://localhost:8080/ehr/main/login_view.do
-                    /* window.location.href ="${CP}/main/main_view.do"; */
+                    window.location.href ="${CP}/main/main_view.do";
                 }else if("40" == data.msgId){
                     alert(data.msgContents);
                     $("#user_id").focus();

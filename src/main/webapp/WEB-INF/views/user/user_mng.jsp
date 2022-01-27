@@ -21,7 +21,7 @@
 %>
 <c:set var="CP"        value="${pageContext.request.contextPath}"/>
 <c:set var="resource"  value="/resources"/>  
-<c:set var="CP_RES"    value="${CP }${resource}" />
+<c:set var="CP_RES"    value="${CP}${resource}" />
 <!DOCTYPE html>
 <html>
 <head>

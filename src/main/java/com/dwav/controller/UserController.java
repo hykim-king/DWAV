@@ -74,7 +74,20 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 	
 	}
 	
-	
+	@RequestMapping(value = "/logout.do",method = RequestMethod.GET)
+	public String logoutView(HttpSession session)throws SQLException{
+		LOG.debug("======================");
+		LOG.debug("=logoutView=");
+		LOG.debug("======================");		
+		
+		if(null != session.getAttribute("user")) {
+			session.removeAttribute("user");
+			session.invalidate();
+		}
+		
+		
+		return "main/main";
+	}
 	
 	
 	@RequestMapping(value = "/user_reg.do", method = RequestMethod.GET)
