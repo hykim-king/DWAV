@@ -117,7 +117,7 @@
 					<option value=6>최대 6명 숙박 가능</option>
 					<option value=7>최대 7명 숙박 가능</option>
 					<option value=8>최대 8명 숙박 가능</option>
-					<option value=8>최대 9명이상 숙박 가능</option>
+					<option value=8>최대 9명 이상 숙박 가능</option>
 				</select>
 			</div>
 			
