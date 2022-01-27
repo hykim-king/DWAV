@@ -166,8 +166,6 @@ public class HomeDaoImple implements HomeDao {
 		return sqlSessionTemplate.selectList("getHomeListBySearchBar", parameters);
 		
 	}
-<<<<<<< HEAD
-=======
 
 
 	@Override

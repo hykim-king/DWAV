@@ -7,11 +7,6 @@ import com.dwav.vo.HomeVO;
 import com.dwav.vo.SearchVO;
 
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 130ebcfb197275a9f3e0dc0e667afae0bfb27a2d
 public interface HomeDao {
 	
 	

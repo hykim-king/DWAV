@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,8 +25,8 @@ import com.google.gson.Gson;
 @Controller("userController")
 @RequestMapping("user")
 public class UserController {
-	final Logger LOG = LogManager.getFormatterLogger(getClass());
-	final String VIEW_NAME = "user/user_mng";
+final Logger LOG = LogManager.getFormatterLogger(getClass());
+	
 
 	@Autowired
 	UserService userService;
@@ -33,6 +34,94 @@ public class UserController {
 	public UserController() {
 	}
 
+	
+	
+	@RequestMapping(value = "/user_view.do", method = RequestMethod.GET)
+	public String userView(Model model, SearchVO inVO)throws SQLException{
+		
+		// 최초 윂 오픈 시, pageSize = 10, pageNum = 1로 초기화한다.
+		if(0==inVO.getPageSize()) {
+			inVO.setPageSize(10);
+			
+		}
+		if(0==inVO.getPageNum()) {
+			inVO.setPageNum(1);
+			
+		}
+		
+		// 검색 구분자, 10 : user_id, 20 : first_name, 30 : last_name, 40 : birth_date, 50 : email, 60 : user_ph_num, 70 : join_date
+		if(null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+		if(null == inVO.getSearchWord()) {
+			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+		
+		LOG.debug("=========================");
+		LOG.debug("=inVO="+inVO);
+		LOG.debug("=========================");	
+		
+		List<UserVO> list = userService.doRetrieve(inVO);
+		
+		double totalCnt = 0;
+		if(list != null && list.size()>0) {
+			totalCnt =Math.ceil(list.get(0).getTotalCnt()/(inVO.getPageSize()*1.0));
+		}
+		model.addAttribute("totalCnt",totalCnt);// 총 글 수
+		model.addAttribute("list",list);// 총 글 수
+		return "user/user_mng";
+		
+	
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/user_reg.do", method = RequestMethod.GET)
+	public String userReg(Model model, SearchVO inVO)throws SQLException{
+		LOG.debug("=======================");
+		LOG.debug("=userReg=");
+		LOG.debug("=======================");	
+		
+		return "user/user_reg";
+	}
+ 
+
+	
+	@RequestMapping(value = "/user_upd.do",method = RequestMethod.GET)
+	public String userUpdate(HttpSession session)throws SQLException{
+		LOG.debug("======================");
+		LOG.debug("=userUpdate=");
+		LOG.debug("======================");		
+		LOG.debug("세션 정보 : "+session.getAttribute("user"));
+
+		if(null != session.getAttribute("user")) {
+			LOG.debug("세션 정보 : "+session.getAttribute("user"));
+		}
+		
+		return "user/user_upd";
+	}
+	
+	
+	
+	
+	
+
+	//Rest VIEW
+	//http://localhost:8080/ehr/user/login_view.do
+	@RequestMapping(value = "/login_view.do",method = RequestMethod.GET)
+	public String loginView()throws SQLException{
+		LOG.debug("======================");
+		LOG.debug("=loginView=");
+		LOG.debug("======================");			
+		return "user/login";
+	}
+	
+	
+	
+	
+	
+	
 	// HttpSession이 파라미터에 추가되는것 : 세션을 굽는다!
 	// method = RequestMethod.POST : get방식의 경우 url에 넘기는 값이 노출되므로
 	@RequestMapping(value = "/doLogin.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -60,12 +149,14 @@ public class UserController {
 		
 		//30번이면 Session처리
 		if("30".equals(message.getMsgId())) {
+			String login_id = inVO.getUser_id();
 			UserVO loginUser = userService.doSelectOne(inVO);
 			if(null != loginUser) {
 				message.setMsgContents(loginUser.getFirst_name()+loginUser.getLast_name()+"님이 로그인 되었습니다.");
 			}
 			
 			session.setAttribute("user", loginUser);
+			session.setAttribute("login_id", login_id);
 		}
 		
 		
@@ -79,7 +170,8 @@ public class UserController {
 		
 	
 
-	@RequestMapping(value = "/idCheck.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/idCheck.do", method = RequestMethod.GET
+			, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String idCheck(UserVO inVO) throws SQLException {
 		LOG.debug("======================");
