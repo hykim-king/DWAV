@@ -37,7 +37,7 @@ public class HomeController {
 	
 	//Rest VIEW
 	//http://localhost:8080/ehr/home/json_view
-	@RequestMapping(value = "/json_view",method = RequestMethod.GET)
+	@RequestMapping(value = "/home_view",method = RequestMethod.GET)
 	public String jsonView(Model model)throws SQLException{
 		
 		return "json/json_view";
@@ -67,7 +67,7 @@ public class HomeController {
 		LOG.debug(acvo.toString());		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("searchList");
-		mv.addObject("voSize", acvo.size());	
+		mv.addObject("voSize", acvo.size());
 		mv.addObject("city", city);
 		mv.addObject("startDate", startDate);
 		mv.addObject("endDate", endDate);

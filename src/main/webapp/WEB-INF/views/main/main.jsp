@@ -105,8 +105,8 @@
          
          <div id="nomemberStatusWrapper">
             <div id="noMemberStatus">
+               <a class="indexFont" href="host.jsp">호스트</a>
                <a class="indexFont" href="join.jsp">회원가입</a>
-               &nbsp;&nbsp;&nbsp;&nbsp;
                <a class="indexFont" href="login.jsp">로그인</a>
             </div>
          </div>   

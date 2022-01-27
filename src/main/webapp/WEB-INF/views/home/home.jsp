@@ -176,7 +176,7 @@
                      <option value=3>인원 3명</option>
                      <option value=4>인원 4명</option>
                      <option value=5>인원 5명</option>
-                     <option value=6>인원 5명+</option>
+                     <option value=6>인원 5명 이상</option>
                   </select>
                </div>
                <input type="button" id="searchSubmitBtn" value="검색" style="cursor:pointer;">

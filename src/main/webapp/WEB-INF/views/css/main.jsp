@@ -28,10 +28,16 @@
     <script src="${CP_RES}/js/jquery.bootpag.js"></script>
 
     <script type="text/javascript">
+    
+    
     </script>    
 </head>
 <body>
 <body>
+
+
+
+
     <div class="nav">
       <div class="container">
         <ul class='pull-left'>
@@ -39,8 +45,10 @@
           <li><a href="#">Browse</a></li>
         </ul>
         <ul class='pull-right'>
+          <li><a href="#">호스트되기</a></li>
           <li><a href="#">회원가입</a></li>
           <li><a href="#">로그인</a></li>
+          <li><a href="#">마이페이지</a></li>
           <li><a href="#">지원센터</a></li>
         </ul>
       </div>
