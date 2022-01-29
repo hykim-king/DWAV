@@ -1,4 +1,4 @@
-package com.Test;
+package com.dwav;
 
 import static org.junit.Assert.*;
 
