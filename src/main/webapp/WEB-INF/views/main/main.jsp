@@ -31,55 +31,55 @@
     <script src="${CP_RES}/js/bootstrap.min.js"></script>
     <script src="${CP_RES}/js/jquery.bootpag.js"></script>
     <script type="text/javascript">
-      $(document).ready(function(){         
-         var checkShow = false;
-         $("#searchSubmitBtn").click(function(){
-            //alert($("#city").val() + " , " + $("#datepicker1").val() + " ~ " + $("#datepicker2").val() +" , "+$("#personnel option:selected").val());
-            if($("#city").val() == "모든 위치" || $("#city").val() == ""){
-               alert("위치를 입력해 주세요.");
-            }else if($("#datepicker1").val() == "체크인 날짜" || $("#datepicker1").val() == ""){
-               alert("출발 날짜를 입력해 주세요.");
-            }else if($("#datepicker2").val() == "체크아웃 날짜" || $("#datepicker2").val() == ""){
-               alert("도착 날짜를 입력해 주세요.");
-            }else{
-               location.href="searchInListFromMainGet.do?city="+$("#city").val()+"&startDate="+$("#datepicker1").val()+"&endDate="+$("#datepicker2").val()+"&person="+$("#personnel").val();
-            }
-         });
-             $("#datepicker1").datepicker({
-             dateFormat: 'yy-mm-dd'
-         });      
-         $("#datepicker2").datepicker({
-             dateFormat: 'yy-mm-dd'
-         });
-         $("#rollDown").hide();
-         $("#tempImg").click(function(){
-            if(checkShow == false){
-               $("#rollDown").show();
-               checkShow = true;
-            }else{
-               $("#rollDown").hide();
-               checkShow = false;
-            }
-         });
-         $("#logo").click(function(){
-            window.location="index.jsp";
-         });
-//          var session = 0;
-//          if(session == null){
-//             $("#noMemberStatus").show();
-//             $("#memberStatus").hide();
-//          }else{
-//             $("#noMemberStatus").hide();
-//             $("#memberStatus").show();
-//          }
-         $("#body").css('height', 700); 
-//          $("#personnel").change(function(){
-//             //alert($("#personnel option:selected").val());
-//          });
-//          $("#roomsListLink").click(function(){
-//             location.href = "???.do?accom_id="+realAccom_id;
-//          });
-      });
+    $(document).ready(function(){         
+        var checkShow = false;
+        $("#searchSubmitBtn").click(function(){
+           //alert($("#city").val() + " , " + $("#datepicker1").val() + " ~ " + $("#datepicker2").val() +" , "+$("#personnel option:selected").val());
+           if($("#city").val() == "모든 위치" || $("#city").val() == ""){
+              alert("위치를 입력해 주세요.");
+           }else if($("#datepicker1").val() == "모든 날짜" || $("#datepicker1").val() == ""){
+              alert("출발 날짜를 입력해 주세요.");
+           }else if($("#datepicker2").val() == "모든 날짜" || $("#datepicker2").val() == ""){
+              alert("도착 날짜를 입력해 주세요.");
+           }else{
+              location.href="searchInListFromMainGet.do?city="+$("#city").val()+"&startDate="+$("#datepicker1").val()+"&endDate="+$("#datepicker2").val()+"&person="+$("#personnel").val();
+           }
+        });
+        $("#datepicker1").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });      
+        $("#datepicker2").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+        $("#rollDown").hide();
+        $("#tempImg").click(function(){
+           if(checkShow == false){
+              $("#rollDown").show();
+              checkShow = true;
+           }else{
+              $("#rollDown").hide();
+              checkShow = false;
+           }
+        });
+        $("#logo").click(function(){
+           window.location="main.jsp";
+        });
+//         var session = 0;
+//         if(session == null){
+//            $("#noMemberStatus").show();
+//            $("#memberStatus").hide();
+//         }else{
+//            $("#noMemberStatus").hide();
+//            $("#memberStatus").show();
+//         }
+        $("#body").css('height', 700); 
+//         $("#personnel").change(function(){
+//            //alert($("#personnel option:selected").val());
+//         });
+//         $("#roomsListLink").click(function(){
+//            location.href = "???.do?accom_id="+realAccom_id;
+//         });
+     });
       
    </script>
    <%
