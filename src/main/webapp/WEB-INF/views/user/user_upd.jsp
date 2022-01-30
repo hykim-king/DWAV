@@ -17,7 +17,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-    String login_id = (String)session.getAttribute("login_id");
+String login_id         =(String)session.getAttribute("login_id"        );
+String login_pwd        =(String)session.getAttribute("login_pwd"       );
+String login_ln         =(String)session.getAttribute("login_fn"        );
+String login_fn         =(String)session.getAttribute("login_ln"        );
+String login_birthdate  =(String)session.getAttribute("login_birthdate" );
+String login_email      =(String)session.getAttribute("login_email"     );
+String login_phnum      =(String)session.getAttribute("login_phnum"     );
+String login_img        =(String)session.getAttribute("login_img"       );
+String login_intro      =(String)session.getAttribute("login_intro"     );
+String login_state      =(String)session.getAttribute("login_state"     );
 %>
 <c:set var="CP"        value="${pageContext.request.contextPath}"/>
 <c:set var="resource"  value="/resources"/>  
@@ -45,20 +54,21 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-
     	
     	
-    	$("#doDelete").on("click",function(e){
-    		/* 세션정보 : login_id */
-            console.log("login_id:"+login_id);
-            if(eUtil.ISEmpty(login_id) ==true){
-                alert("로그인 여부를 확인 하세요.");
+        $("#doDelete").on("click",function(e){
+        	
+        	let login_id = "<%= login_id %>";
+        	
+        	if(eUtil.ISEmpty(login_id) ==true){
+                alert("ID를 확인 하세요.");
                 return;
-            }
-            
-            if(confirm("탈퇴 하시겠습니까?")==false)return;
-            
-            let url = "${CP}/user/doDelete.do";
+        
+        	}
+        	
+        	if(confirm("아이디를 삭제하시겠습니까?")==false)return;
+        	
+        	let url = "${CP}/user/doDelete.do";
             let parameters = {
                     "login_id":login_id
             };
@@ -69,13 +79,112 @@
                 console.log("data.msgContents:"+data.msgContents);    
                 if("1" == data.msgId){
                     alert(data.msgContents);
+                    window.location.href ="${CP}/main/main_view.do";
                 }else{
                     alert(data.msgContents);
                 }                   
             });
-            
+        	window.location.href ="${CP}/user/logout.do";
         });
+        
+        
+        
+        $("#doUpdate").on("click",function(e){
+        	 console.log("doUpdate");
+             let url = "${CP}/user/doUpdate.do";
+             
+             let user_id        =$("#login_id").val();
+             let user_pwd       =$("#login_pwd").val();
+             let last_name        =$("#login_ln").val();
+             let first_name        =$("#login_fn").val();
+             /* let login_birthdate =$("#login_birthdate").val(); */
+             let email     =$("#login_email").val();
+             let user_ph_num     =$("#login_phnum").val();
+             let user_intro     =$("#login_intro").val();
+             let user_state     =$("#login_state").val();
+        	 
+             console.log("user_id       ="+user_id         );
+             console.log("user_pwd      ="+user_pwd        );
+             console.log("last_name       ="+first_name         );
+             console.log("first_name       ="+last_name         );
+             /* console.log("login_birthdate="+login_birthdate  ); */
+             console.log("email    ="+email      );
+             console.log("user_ph_num    ="+user_ph_num      );
+             console.log("user_intro    ="+user_intro      );
+             console.log("user_state    ="+user_state      );
+        	
+             if(eUtil.ISEmpty(user_id) ==true){
+                 alert("아이디를 확인 하세요.");
+                 return;
+             }
+             if(eUtil.ISEmpty(user_pwd) ==true){
+                 alert("비밀번호를 확인 하세요.");
+                 return;
+             }
+             
+             if(eUtil.ISEmpty(last_name) ==true){
+                 alert("성을 확인 하세요.");
+                 return;
+             }
+             
+             if(eUtil.ISEmpty(first_name) ==true){
+                 alert("이름을 확인 하세요.");
+                 return;
+             }
+             
+/*              if(eUtil.ISEmpty(login_birthdate) ==true){
+                 alert("생일을 확인 하세요.");
+                 return;
+             } */
+             
+             if(eUtil.ISEmpty(email) ==true){
+                 alert("이메일을 확인 하세요.");
+                 return;
+             }
+             if(eUtil.ISEmpty(user_ph_num) ==true){
+                 alert("전화번호를 확인 하세요.");
+                 return;
+             }
+             if(eUtil.ISEmpty(user_intro) ==true){
+                 alert("자기소개항목을 확인 하세요.");
+                 return;
+             }
+             
+             
+             let parameters = {
+            		 "user_id":user_id,        
+            		 "user_pwd":user_pwd,      
+            		 "last_name":last_name,        
+            		 "first_name":first_name,        
+            		 /* "login_birthdate":login_birthdate,   */
+            		 "email":email,      
+            		 "user_ph_num":user_ph_num,      
+            		 "user_intro":user_intro,      
+            		 "user_state":user_state       
+             };
+             
+             let method = "POST";
+             let async  = true;
+             if(confirm("수정 하시겠습니까?")==false)return;
+             
+             EClass.callAjax(url,parameters,method,async,function(data){
+                 console.log("data.msgId:"+data.msgId);
+                 console.log("data.msgContents:"+data.msgContents);
+                 if("1" == data.msgId){
+                     alert(data.msgContents);
+                     
+                 }else{
+                     alert(data.msgContents);
+                 }
+                 
+             });
+             
+        });
+        
+    
+    
     });
+    
     </script>
 </head>
 <body>
@@ -91,57 +200,93 @@
 
         <!-- 버튼 -->
            <div class="row text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <input type="button" class="btn btn-default btn-sm btn-primary" value="수정" id="doUpdate">
-              <input type="button" class="btn btn-default btn-sm btn-primary" value="삭제" id="doDelete">
-              <input type="button" class="btn btn-default btn-sm btn-primary" value="목록" id="moveToList">
+              <input type="button" class="btn btn-default btn-sm btn-primary" value="정보 수정" id="doUpdate">
+              <input type="button" class="btn btn-default btn-sm btn-primary" value="회원 탈퇴" id="doDelete">
            </div>
         <!--// 버튼 ------------------------------------------------------------->
-        
-                     
-           
         <c:out value=""></c:out>
-        <!-- 등록 -->
+        <!-- 수정 -->
         <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <form action="#" class="form-horizontal">
               <div class="form-group">
-                <label for="boardId" class="col-sm-2 control-label">사용자 ID</label>
+                <label for="login_id" class="col-sm-2 control-label">사용자 ID</label>
                 <div class="col-sm-10">
-                  <input type="text" value="<c:out value='${login_id}'  />" readonly="readonly" maxlength="20" class="form-control" name="user_id" id="user_id" placeholder="사용자 ID">
+                  <input type="text" value="<c:out value='${login_id}'  />" readonly="readonly" maxlength="20" class="form-control" name="login_id" id="login_id" placeholder="사용자 ID">
                 </div>
               </div>
-                        
+
               <div class="form-group">
-                <label for="regId" class="col-sm-2 control-label">등록자</label>
+                <label for="login_pwd" class="col-sm-2 control-label">비밀번호</label>
                 <div class="col-sm-10">
-                  <input type="text" value="<c:out value='${vo.regId}'  />"  maxlength="20" class="form-control" name="regId" id="regId" placeholder="등록자">
+                  <input type="text" value="<c:out value='${login_pwd}'  />" class="form-control" name="login_pwd" id="login_pwd" placeholder="비밀번호">
                 </div>
               </div>
+
               <div class="form-group">
-                <label for="regDt" class="col-sm-2 control-label">등록일</label>
+                <label for="login_ln" class="col-sm-2 control-label">성</label>
                 <div class="col-sm-10">
-                  <input type="text" value="<c:out value='${vo.regDt}'  />" readonly="readonly" maxlength="20" class="form-control" name="regDt" id="regDt" placeholder="등록일">
+                  <input type="text" value="<c:out value='${login_ln}'  />" class="form-control" name="login_ln" id="login_ln" placeholder="성">
                 </div>
               </div>
-                          
+
               <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">제목</label>
+                <label for="login_fn" class="col-sm-2 control-label">이름</label>
                 <div class="col-sm-10">
-                  <input type="text" value="<c:out value='${vo.title}'  />" maxlength="50" class="form-control" name="title" id="title" placeholder="제목">
+                  <input type="text" value="<c:out value='${login_fn}'  />" class="form-control" name="login_fn" id="login_fn" placeholder="이름">
                 </div>
-              </div>            
+              </div>
+
+<%--               <div class="form-group">
+                <label for="login_birthdate" class="col-sm-2 control-label">생일</label>
+                <div class="col-sm-10">
+                  <input type="date" value="<c:out value='${login_birthdate}'  />" class="form-control" name="login_birthdate" id="login_birthdate" placeholder="생일">
+                </div>
+              </div> --%>
+
               <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">내용</label>
+                <label for="login_email" class="col-sm-2 control-label">이메일</label>
                 <div class="col-sm-10">
-                  <textarea rows="10" cols="20" name="contents" id="contents" class="form-control"><c:out value='${vo.contents}'  /></textarea>
+                  <input type="text" value="<c:out value='${login_email}'  />" class="form-control" name="login_email" id="login_email" placeholder="이메일">
                 </div>
-              </div>                                        
+              </div>
+
+              <div class="form-group">
+                <label for="login_phnum" class="col-sm-2 control-label">전화번호</label>
+                <div class="col-sm-10">
+                  <input type="text" value="<c:out value='${login_phnum}'  />" class="form-control" name="login_phnum" id="login_phnum" placeholder="전화번호">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="login_intro" class="col-sm-2 control-label">자기소개</label>
+                <div class="col-sm-10">
+                  <input type="text" value="<c:out value='${login_intro}'  />" class="form-control" name="login_intro" id="login_intro" placeholder="자기소개">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="login_state" class="col-sm-2 control-label">자격 상태</label>
+                <div class="col-sm-10">
+                  <input type="text" value="<c:out value='${login_state}'  />" readonly="readonly" class="form-control" name="login_state" id="login_state" placeholder="자격 상태">
+                </div>
+              </div>
+                           
           </form>
         </div>             
-        <!--// 등록 ------------------------------------------------------------->
+        <!--// 수정 ------------------------------------------------------------->
         
         
      </div>  
      <!--// 반응형 고정폭 콘테이너 ------------------------------------------------------------->
-            login_id : <%=login_id %><br/>
+<%-- login_id        : <%=login_id        %><br/>    
+login_pwd       : <%=login_pwd       %><br/>
+login_ln        : <%=login_ln        %><br/>    
+login_fn        : <%=login_fn        %><br/>    
+login_birthdate : <%=login_birthdate %><br/>
+login_email     : <%=login_email     %><br/>
+login_phnum     : <%=login_phnum     %><br/>
+login_img       : <%=login_img       %><br/>
+login_intro     : <%=login_intro     %><br/>
+login_state     : <%=login_state     %><br/> --%>
 </body>
 </html>

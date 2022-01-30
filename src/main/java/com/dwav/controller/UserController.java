@@ -101,18 +101,32 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
  
 
 	
-	@RequestMapping(value = "/user_upd.do",method = RequestMethod.GET)
-	public String userUpdate(HttpSession session)throws SQLException{
-		LOG.debug("======================");
-		LOG.debug("=userUpdate=");
-		LOG.debug("======================");		
-		LOG.debug("세션 정보 : "+session.getAttribute("user"));
-
-		if(null != session.getAttribute("user")) {
-			LOG.debug("세션 정보 : "+session.getAttribute("user"));
-		}
+	/*
+	 * @RequestMapping(value = "/user_upd.do",method = RequestMethod.GET) public
+	 * String userUpdate(HttpSession session)throws SQLException{
+	 * LOG.debug("======================"); LOG.debug("=userUpdate=");
+	 * LOG.debug("======================");
+	 * LOG.debug("세션 정보 : "+session.getAttribute("user"));
+	 * 
+	 * if(null != session.getAttribute("user")) {
+	 * LOG.debug("세션 정보 : "+session.getAttribute("user")); }
+	 * 
+	 * return "user/user_upd"; }
+	 */
+	
+	@RequestMapping(value = "/userSelectOne.do",method = RequestMethod.GET)
+	public String userSelectOne(UserVO inVO, Model model)throws SQLException{
 		
+		
+		LOG.debug("=========================");
+		LOG.debug("=inVO="+inVO);
+		LOG.debug("=========================");
+		
+		UserVO outVO = this.userService.doSelectOne(inVO);
+		LOG.debug("=outVO="+outVO);
+		model.addAttribute("vo", outVO);
 		return "user/user_upd";
+				
 	}
 	
 	
@@ -162,14 +176,26 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 		
 		//30번이면 Session처리
 		if("30".equals(message.getMsgId())) {
-			String login_id = inVO.getUser_id();
+			
 			UserVO loginUser = userService.doSelectOne(inVO);
+			
+			
+			
 			if(null != loginUser) {
 				message.setMsgContents(loginUser.getFirst_name()+loginUser.getLast_name()+"님이 로그인 되었습니다.");
 			}
 			
-			session.setAttribute("user", loginUser);
-			session.setAttribute("login_id", login_id);
+			session.setAttribute("user"				, loginUser);
+			session.setAttribute("login_id"			, loginUser.getUser_id());
+			session.setAttribute("login_pwd"		, loginUser.getUser_pwd());
+			session.setAttribute("login_fn"			, loginUser.getFirst_name());
+			session.setAttribute("login_ln"			, loginUser.getLast_name());
+			session.setAttribute("login_birthdate"	, loginUser.getBirth_date());
+			session.setAttribute("login_email"		, loginUser.getEmail());
+			session.setAttribute("login_phnum"		, loginUser.getUser_ph_num());
+			session.setAttribute("login_img"		, loginUser.getUser_img());
+			session.setAttribute("login_intro"		, loginUser.getUser_intro());
+			session.setAttribute("login_state"		, loginUser.getUser_state());
 		}
 		
 		

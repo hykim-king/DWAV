@@ -17,7 +17,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-    String login_id = (String)session.getAttribute("login_id");
+String login_id         =(String)session.getAttribute("login_id"        );
+String login_pwd        =(String)session.getAttribute("login_pwd"       );
+String login_ln         =(String)session.getAttribute("login_fn"        );
+String login_fn         =(String)session.getAttribute("login_ln"        );
+String login_birthdate  =(String)session.getAttribute("login_birthdate" );
+String login_email      =(String)session.getAttribute("login_email"     );
+String login_phnum      =(String)session.getAttribute("login_phnum"     );
+String login_img        =(String)session.getAttribute("login_img"       );
+String login_intro      =(String)session.getAttribute("login_intro"     );
+String login_state      =(String)session.getAttribute("login_state"     );
 %>
 <c:set var="CP"        value="${pageContext.request.contextPath}"/>
 <c:set var="resource"  value="/resources"/>  
@@ -56,7 +65,12 @@
 		  /* 유저의 정보 수정 기능은 로그인 이후, 세션 정보를 통해 이루어져야 하므로, 로그인 화면부터 만들자. */
  		  $("#doUpdate").on("click",function(e){
 			 console.log("doUpdate:");
-             window.location.href ="${CP}/user/user_upd.do";
+			 
+			 let user_id = "<%=login_id%>";
+             
+			 if(confirm("정보를 조회하시겠습니까?")==false)return;
+
+			 window.location.href ="${CP}/user/userSelectOne.do?user_id="+user_id;
 		  }); 
 
 		
@@ -283,6 +297,17 @@
               <input type="button" class="btn btn-default btn-sm" value="삭제" id="doDelete">
            </div>
         <!--// 버튼 ------------------------------------------------------------->
+        
+login_id        : <%=login_id        %><br/>    
+login_pwd       : <%=login_pwd       %><br/>
+login_ln        : <%=login_ln        %><br/>    
+login_fn        : <%=login_fn        %><br/>    
+login_birthdate : <%=login_birthdate %><br/>
+login_email     : <%=login_email     %><br/>
+login_phnum     : <%=login_phnum     %><br/>
+login_img       : <%=login_img       %><br/>
+login_intro     : <%=login_intro     %><br/>
+login_state     : <%=login_state     %><br/>
   </div>
   </div>
 	

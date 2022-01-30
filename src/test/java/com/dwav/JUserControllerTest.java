@@ -82,7 +82,7 @@ public class JUserControllerTest {
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doLogin() throws Exception{
 		// 1. 기존 데이터 삭제
 				userDao.deleteAll();
@@ -124,7 +124,7 @@ public class JUserControllerTest {
 	
 	//id가 중복되면 flag = 1 -> test 통과 // id가 중복되지 않는 경우, flag = 0, test 실패
 	@Test
-	//@Ignore
+	@Ignore
 	public void idCheck() throws Exception{
 		// 1. 기존 데이터 삭제
 		userDao.deleteAll();
@@ -166,7 +166,7 @@ public class JUserControllerTest {
 	
 	//삭제,등록,단건조회
 		@Test
-		//@Ignore
+		@Ignore
 		public void addAndGet() throws Exception {
 			LOG.debug("====================");
 			LOG.debug("=addAndGet()=");
@@ -195,7 +195,7 @@ public class JUserControllerTest {
 	
 		
 	@Test
-	//@Ignore
+	@Ignore
 	public void  doRetrieve()throws Exception{
 		
 		userDao.deleteAll();
@@ -241,9 +241,11 @@ public class JUserControllerTest {
 	
 	
 	public UserVO doSelectOne(UserVO inVO) throws Exception{
-		userDao.deleteAll();
-		
-		userDao.doInsert(inVO);
+		/*
+		 * userDao.deleteAll();
+		 * 
+		 * userDao.doInsert(inVO);
+		 */
 
 		
 		//호출 URL, param,호출방식

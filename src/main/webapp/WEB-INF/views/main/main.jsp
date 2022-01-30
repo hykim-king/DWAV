@@ -79,6 +79,19 @@
 //         $("#roomsListLink").click(function(){
 //            location.href = "???.do?accom_id="+realAccom_id;
 //         });
+
+
+        
+        
+        $("#doUpdate").on("click",function(e){
+        	console.log("update");
+/*         	
+        	let user_id = login_id;
+        	console.log(user_id);
+        	
+        	if(confirm("정보를 조회하시겠습니까?")==false)return;
+        	window.location.href="{CP}/user/doSelectOne.do?user+id="+user_id; */
+        });
      });
       
    </script>
@@ -111,6 +124,8 @@
                <a class="indexFont" href="host.jsp">호스트</a>
                <a class="indexFont" href="../user/user_reg.do">회원가입</a>
                <a class="indexFont" href="../user/login_view.do">로그인</a>
+               <input type ="button" class="btn btn-default btn-sm" value = "정보 수정" id = "doUpdate">
+               <!-- <a class="indexFont" id = "update" >정보 수정</a> -->
             </div>
          </div>   
          <%
