@@ -22,6 +22,7 @@
 		      accom_id     = #{accom_id}
 		     ,amenity_type = #{amenity_type}
 		     ,amenity_val  = #{amenity_val} 
+		     ,reg_id       = #{reg_id}
 		WHERE amen_id      = #{amen_id}     
 </update>
 
@@ -29,15 +30,15 @@
 	<!-- amen_id를 시퀀스로 -->
 	<insert id="doInsertAmen" parameterType="FacilitiesVO" >
         INSERT INTO facilities (
-            amen_id,
             accom_id,
             amenity_type,
-            amenity_val
+            amenity_val,
+            reg_id
         ) VALUES (
-            #{amen_id},
             #{accom_id},
             #{amenity_type},
-            #{amenity_val}
+            #{amenity_val},
+            #{reg_id}
         )
 	</insert>
 	
@@ -52,6 +53,12 @@
 		delete from facilities
 		where 
 		accom_id = #{accom_id}
+	</delete>
+	
+	<delete id="deleteAmenHost">
+		delete from facilities
+		where 
+		reg_id = #{reg_id}
 	</delete>
 	
 	<delete id="doDeleteAmen">
@@ -71,7 +78,8 @@
               amen_id,
               accom_id, 
               amenity_type, 
-              amenity_val
+              amenity_val,
+              reg_id
         FROM
             facilities
     </select>
@@ -81,7 +89,8 @@
               amen_id,
               accom_id, 
               amenity_type, 
-              amenity_val
+              amenity_val,
+              reg_id
         from 
               facilities 
         where 
@@ -106,6 +115,9 @@
             <when test=" '40' == searchDiv and '' != searchWord  ">
                     amenity_val LIKE '%'||#{searchWord}||'%'
                 </when>
+            <when test=" '50' == searchDiv and '' != searchWord  ">
+                    reg_id LIKE '%'||#{searchWord}||'%'
+                </when>
             </choose>
         </where>
     </sql>
@@ -117,9 +129,11 @@
 		    (
 		    select 
 		            TT1.rnum as num
+		            ,tt1.amen_id
 		            ,tt1.accom_id
 		            ,tt1.amenity_type
 		            ,tt1.amenity_val
+		            ,tt1.reg_id
 		    
 		    from(
 		        select rownum rnum, t1.*
@@ -140,6 +154,7 @@
 		        --검색 조건
 		        <include refid="searchAmenCondition"/>
 		    )B
+	   order by A.amen_id
 	</select>
 	
 	
@@ -154,7 +169,8 @@
               amen_id,
               accom_id, 
               amenity_type, 
-              amenity_val
+              amenity_val,
+              reg_id
         from 
               facilities 
         where 

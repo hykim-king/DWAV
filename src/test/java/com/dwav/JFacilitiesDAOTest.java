@@ -64,9 +64,9 @@ public class JFacilitiesDAOTest {
 	public void setUp() throws Exception {
 		search = new SearchVO("", "", 10, 1);
 
-		facil01 = new FacilitiesVO(1,1, "수영장", "수영장1");
-		facil02 = new FacilitiesVO(2,1, "수영장", "수영장2");
-		facil03 = new FacilitiesVO(3,1, "수영장", "수영장3");
+		facil01 = new FacilitiesVO(1, "수영장", "수영장1", "physicskdh");
+		facil02 = new FacilitiesVO(1, "수영장", "수영장2", "physicskdh");
+		facil03 = new FacilitiesVO(1, "수영장", "수영장3", "physicskdh");
 
 		LOG.debug("0=============================");
 		LOG.debug("0context=" + context);
@@ -116,6 +116,7 @@ public class JFacilitiesDAOTest {
 	
 	
 	@Test
+	//@Ignore
 	public void RetrieveAmen() throws SQLException{
 		LOG.debug("====================");
 		LOG.debug("=doRetrieveAmen()=");
@@ -132,15 +133,14 @@ public class JFacilitiesDAOTest {
 	
 
 	@Test
+	@Ignore 
 	public void getAll() throws SQLException {
 		
 		LOG.debug("==================");
 		LOG.debug("getAll()");
 		LOG.debug("==================");
 		
-		dao.doDeleteAmen(facil01);
-		dao.doDeleteAmen(facil02);
-		dao.doDeleteAmen(facil03);
+		dao.deleteAllAmen();
 		
 		
 		int flag = dao.doInsertAmen(facil01);

@@ -64,10 +64,10 @@ public class JFacilitiesControllerTest {
 	public void setUp() throws Exception {
 		
 		
-		facil01 = new FacilitiesVO(1,1, "수영장", "수영장1");
-		facil02 = new FacilitiesVO(2,1, "수영장", "수영장2");
-		facil03 = new FacilitiesVO(3,1, "수영장", "수영장3");
-		facil04 = new FacilitiesVO(4,1, "안마의자", "바디프렌즈");
+		facil01 = new FacilitiesVO(1, "수영장", "수영장1", "physicskdh");
+		facil02 = new FacilitiesVO(1, "수영장", "수영장2", "physicskdh");
+		facil03 = new FacilitiesVO(1, "수영장", "수영장3", "physicskdh");
+		facil04 = new FacilitiesVO(1, "안마의자", "바디프렌즈", "physicskdh");
 		
 		search = new SearchVO();
 
@@ -92,13 +92,11 @@ public class JFacilitiesControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void doRetrieveAmen() throws Exception{
 		
-		dao.deleteAllAmen();
-		dao.doInsertAmen(facil01);
-		dao.doInsertAmen(facil02);
-		dao.doInsertAmen(facil03);
+		//dao.deleteAllAmen();
+
 		
 		MockHttpServletRequestBuilder requestBuilder =
 				MockMvcRequestBuilders.get("/facilities/doRetrieveAmen.do")
@@ -125,7 +123,7 @@ public class JFacilitiesControllerTest {
 		List<FacilitiesVO> list = 
 				gson.fromJson(result, new TypeToken<List<FacilitiesVO>>(){}.getType());
 		
-		assertEquals(list.size(), 3);
+		assertEquals(list.size(), 6);
 	}
 
 	
@@ -138,10 +136,11 @@ public class JFacilitiesControllerTest {
 	public void doInsertAmen() throws Exception{
 		//호출 URL, param,호출방식
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/facilities/doInsertAmen.do")
-				.param("amen_id", facil04.getAmen_id() + "")
-				.param("accom_id", facil04.getAccom_id() + "")
-				.param("amenity_type", facil04.getAmenity_type())
-				.param("amenity_val", facil04.getAmenity_val())
+				.param("amen_id", facil03.getAmen_id() + "")
+				.param("accom_id", facil03.getAccom_id() + "")
+				.param("amenity_type", facil03.getAmenity_type())
+				.param("amenity_val", facil03.getAmenity_val())
+				.param("reg_id", facil03.getReg_id())
 				;
 
 		ResultActions resultActions = this.mockMvc.perform(requestBuilder).andExpect(status().isOk());
@@ -160,7 +159,7 @@ public class JFacilitiesControllerTest {
 	 * @throws Exception 
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void doDeleteAmen() throws Exception{
 
 		// 호출 URL, param,호출방식

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +17,7 @@ import com.dwav.cmn.StringUtil;
 import com.dwav.dao.FacilitiesDAO;
 import com.dwav.vo.FacilitiesVO;
 import com.dwav.vo.SearchVO;
+import com.dwav.vo.UserVO;
 import com.google.gson.Gson;
 
 
@@ -29,6 +31,52 @@ public class FacilitiesController {
 	FacilitiesDAO facilitiesDAO;
 	
 	public FacilitiesController() {}
+	
+	
+	@RequestMapping(value = "/facil_view.do", method = RequestMethod.GET)
+	public String facilView(Model model, SearchVO inVO)throws SQLException{
+		
+		if(0==inVO.getPageSize()) {
+			inVO.setPageSize(10);
+			
+		}
+		if(0==inVO.getPageNum()) {
+			inVO.setPageNum(1);
+			
+		}
+		
+		// 검색 구분자, 10 : user_id, 20 : first_name, 30 : last_name, 40 : birth_date, 50 : email, 60 : user_ph_num, 70 : join_date
+		if(null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+		if(null == inVO.getSearchWord()) {
+			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+		
+		LOG.debug("=========================");
+		LOG.debug("=inVO="+inVO);
+		LOG.debug("=========================");	
+		
+		List<FacilitiesVO> list = facilitiesDAO.doRetrieveAmen(inVO);
+		
+		double totalCnt = 0;
+		if(list != null && list.size()>0) {
+			totalCnt =Math.ceil(list.get(0).getTotalCnt()/(inVO.getPageSize()*1.0));
+		}
+		model.addAttribute("totalCnt",totalCnt);// 총 글 수
+		model.addAttribute("list",list);// 총 글 수
+		return "facility/facil_mng";
+		
+	}
+
+	@RequestMapping(value = "/facil_reg.do", method = RequestMethod.GET)
+	public String facilReg(Model model, SearchVO inVO)throws SQLException{
+		LOG.debug("=======================");
+		LOG.debug("=facilReg=");
+		LOG.debug("=======================");	
+		
+		return "facility/facil_reg";
+	}
 	
 	
 	
