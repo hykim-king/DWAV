@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dwav">
+<insert id = "doInsertReview" parameterType="ReviewVO">
+
+INSERT INTO review (
+    accom_id,
+    text,
+    user_id,
+    point,
+    title
+) VALUES (
+    #{accom_id},
+    #{text},
+    #{user_id},
+    #{point},
+    #{title}
+)
+
+</insert>
+
+<select id="doSelectReview" parameterType="ReviewVO">
+SELECT
+    review_id,
+    accom_id,
+    text,
+    user_id,
+    point,
+    title
+FROM
+	review
+where
+	review_id = #{review_id}
+
+
+</select>
+
+
+<delete id="dodeleteReview" parameterType="ReviewVO">
+DELETE FROM review
+WHERE
+        review_id = #{review_id}
+</delete>
+
+
+
+<update id="doupdateReview" parameterType="ReviewVO">
+UPDATE review
+		SET
+		review_id  =  #{ review_id  },
+		accom_id   =  #{ accom_id  },
+		text	   =  #{ text  },
+		user_id	   =  #{ user_id  },
+		point	   =  #{ point  },
+		title	   =  #{ title  }        
+		
+							
+		where review_id = #{review_id} 
+
+</update>
+
+</mapper>
