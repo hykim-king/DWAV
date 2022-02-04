@@ -191,7 +191,7 @@
 						contentType:'application/json',
 						dataType:'json',
 						data : JSON.stringify(data),
-						url : "updateRoomInfo.do?id=<%=id%>",
+						url : "UpdateHome.do?id=<%=id%>",
 						type : "POST",						
 						success : function(data){
 							console.log(data);

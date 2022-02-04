@@ -157,7 +157,7 @@ public class HomeController {
 	} 
 	
 	
-	@RequestMapping(value="/InsertHome.do" ,method = RequestMethod.POST
+	@RequestMapping(value="/InsertHome.do" ,method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //스프링에서 비동기 처리를 하는 경우,HTTP 요청의 분문 body 부분이 그대로 전달된다.
 	public String InsertHome(HomeVO inVO) throws SQLException {

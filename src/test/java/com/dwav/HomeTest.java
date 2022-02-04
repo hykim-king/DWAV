@@ -186,6 +186,7 @@ public class HomeTest {
 	}
 	
 	@Test
+//	@Ignore
 	public void RetrieveHome()throws SQLException{
 		search.setPageNum(1);
 		search.setPageSize(20);

@@ -54,7 +54,7 @@
            dateFormat: 'yy-mm-dd'
        });
        $("#logo").click(function(){
-          window.location="index.jsp";
+          window.location="main.jsp";
        });
        $("#minusMaxSleepRoomsBtn").click(function(){
           var maxSleepRoomsCnt = parseFloat($("#maxSleepRoomsCnt").text());
@@ -195,7 +195,7 @@
                 contentType:'application/json',
                 dataType:'json',
                 data : JSON.stringify(data),
-                url : "addAccommodation.do?id=<%=id%>",
+                url : "InsertHome.do?id=<%=id%>",
                 type : "POST",                  
                 success : function(data){
                    console.log(data);
@@ -234,13 +234,10 @@
 					<h2 style="color: #fff;">&nbsp;&nbsp;메뉴</h2>
 					<div id="rollDown">
 						<div class="list-group">
-							<a href="mypage.jsp"
-								class="list-group-item list-group-item-action">마이 페이지</a> <a
-								href="getReservList.do?userId=<%=id%>"
-								class="list-group-item list-group-item-action">예약 리스트</a> <a
-								href="roomsList.jsp"
-								class="list-group-item list-group-item-action">숙박지 리스트</a> <a
-								href="logout.do" class="list-group-item list-group-item-action">로그아웃</a>
+							<a href="mypage.jsp" class="list-group-item list-group-item-action">마이 페이지</a> 
+							<a href="getReservList.do?userId=<%=id%>" class="list-group-item list-group-item-action">예약 리스트</a> 
+							<a href="roomsList.jsp" class="list-group-item list-group-item-action">숙박지 리스트</a> 
+							<a href="logout.do" class="list-group-item list-group-item-action">로그아웃</a>
 						</div>
 					</div>
 				</div>
@@ -324,8 +321,8 @@
 			<br> <font size="4px"><b>시/도
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 시군</b></font><br>
-			<input type="text" id="address1" name="address1" value="서울특별시" /> <input
-				type="text" id="address2" name="address2" value="예) 강남구" />
+			<input type="text" id="address1" name="address1" value="서울특별시" /> 
+			<input type="text" id="address2" name="address2" value="예) 강남구" />
 			<h3>도로명 / 건물번호 / 아파트 이름 / 건물 이름</h3>
 			<input type="text" id="address3" name="address3" value="예) 언주로 406">
 			<h3>아파트 / 건물명 및 동 / 호수 (선택사항)</h3>
