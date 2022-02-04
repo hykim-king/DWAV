@@ -34,7 +34,7 @@
     $(document).ready(function(){         
         var checkShow = false;
         $("#searchSubmitBtn").click(function(){
-           //alert($("#city").val() + " , " + $("#datepicker1").val() + " ~ " + $("#datepicker2").val() +" , "+$("#personnel option:selected").val());
+           alert($("#city").val() + " , " + $("#datepicker1").val() + " ~ " + $("#datepicker2").val() +" , "+$("#personnel option:selected").val());
            if($("#city").val() == "모든 위치" || $("#city").val() == ""){
               alert("위치를 입력해 주세요.");
            }else if($("#datepicker1").val() == "모든 날짜" || $("#datepicker1").val() == ""){
@@ -62,42 +62,28 @@
            }
         });
         $("#logo").click(function(){
-           window.location="main.jsp";
+           window.location="index.jsp";
         });
-//         var session = 0;
-//         if(session == null){
-//            $("#noMemberStatus").show();
-//            $("#memberStatus").hide();
-//         }else{
-//            $("#noMemberStatus").hide();
-//            $("#memberStatus").show();
-//         }
+         var session = 0;
+         if(session == null){
+            $("#noMemberStatus").show();
+            $("#memberStatus").hide();
+         }else{
+            $("#noMemberStatus").hide();
+            $("#memberStatus").show();
+         }
         $("#body").css('height', 700); 
-//         $("#personnel").change(function(){
-//            //alert($("#personnel option:selected").val());
-//         });
-//         $("#roomsListLink").click(function(){
-//            location.href = "???.do?accom_id="+realAccom_id;
-//         });
-
-
-        
-        
-        $("#doUpdate").on("click",function(e){
-        	console.log("update");
-/*         	
-        	let user_id = login_id;
-        	console.log(user_id);
-        	
-        	if(confirm("정보를 조회하시겠습니까?")==false)return;
-        	window.location.href="{CP}/user/doSelectOne.do?user+id="+user_id; */
-        });
+         $("#personnel").change(function(){
+            alert($("#personnel option:selected").val());
+         });
+         $("#roomsListLink").click(function(){
+            location.href = "???.do?accom_id="+realAccom_id;
+         });
      });
-      
-   </script>
-   <%
-      String id = (String) session.getAttribute("userid");
-   %>
+  </script>
+  <%
+     String id = (String) session.getAttribute("userid");
+  %>
 </head>
 <body class="body">
    <div id="top">
@@ -121,7 +107,7 @@
          
          <div id="nomemberStatusWrapper">
             <div id="noMemberStatus">
-               <a class="indexFont" href="host.jsp">호스트</a>
+              
                <a class="indexFont" href="../user/user_reg.do">회원가입</a>
                <a class="indexFont" href="../user/login_view.do">로그인</a>
                
@@ -139,6 +125,7 @@
                <h2 style="color:#fff;">&nbsp;&nbsp;메뉴</h2>
                <div id="rollDown">
                   <div class="list-group">
+                    <a href="../home/InsertHome.do" class="list-group-item list-group-item-action">방 등록하기</a>
                     <a href="mypage.jsp" class="list-group-item list-group-item-action">마이 페이지</a>
                     <a href="gethomeList.do?userId=<%=id %>" class="list-group-item list-group-item-action">예약 리스트</a>
                     <a href="roomsList.jsp" class="list-group-item list-group-item-action">숙박지 리스트</a>
@@ -180,11 +167,11 @@
                   <p class="searchFont">위치</p>
                   <input type="text" id="city" name="city" value="모든 위치">
                </div>
-               <div id="datepickerDiv">
+              <div id="datepickerDiv"/>
                   <p class="searchFont">날짜</p>
-                  <input type="text" id="datepicker1" name="startDate" value="체크인 날짜">
+                  <input type="text" id="datepicker1" name="startDate" value="모든 날짜">
                   &nbsp;&nbsp;~&nbsp;&nbsp;
-                  <input type="text" id="datepicker2" name="endDate" value="체크아웃 날짜">
+                  <input type="text" id="datepicker2" name="endDate" value="모든 날짜">
                </div>
                <div id="personnelDiv">
                <p class="searchFont">인원</p>

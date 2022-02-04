@@ -12,7 +12,7 @@
 		<result property="bathrooms"      column="bathrooms"/>
 		<result property="bedrooms"       column="bedrooms"/>
 		<result property="descrption"     column="descrption"/>
-		<result property="Host_Id"        column="host_Id"/>
+		<result property="User_id"        column="User_id"/>
 		<result property="location"       column="location"/>
 		<result property="price"          column="price"/>
 		<result property="Property_Type"  column="property_Type"/>
@@ -35,7 +35,7 @@
 			bathrooms,
 			bedrooms,
 			descrption,
-			host_id,
+			User_id,
 			location,
 			price,
 			property_type,
@@ -61,7 +61,7 @@
 			    bathrooms,
 			    bedrooms,
 			    descrption,
-			    host_id,
+			    User_id,
 			    location,
 			    price,
 			    property_type,
@@ -83,7 +83,7 @@
 			bathrooms,
 			bedrooms,
 			descrption,
-			host_Id,
+			User_id,
 			location,
 			price,
 			property_Type,
@@ -98,7 +98,7 @@
 			#{bathrooms},
 			#{bedrooms},
 			#{descrption},
-			#{host_Id},
+			#{User_id},
 			#{location},
 			#{price},
 			#{property_Type},
@@ -127,7 +127,7 @@
 			bathrooms     =  #{bathrooms      },
 			bedrooms      =  #{bedrooms       },
 			descrption    =  #{descrption     },
-			host_id       =  #{Host_Id        },
+			User_id       =  #{User_id        },
 			location      =  #{location       },
 			price         =  #{price          },
 			property_type =  #{property_Type  },
@@ -197,7 +197,7 @@
 				,bathrooms
 				,bedrooms
 				,descrption
-				,host_id
+				,User_id
 				,name
 			FROM(SELECT ROWNUM rnum, T1.*
 				FROM(SELECT *

@@ -47,14 +47,9 @@
              checkShow = false;
           }
        });
-       $("#topDatepicker1").datepicker({
-           dateFormat: 'yy-mm-dd'
-       });      
-       $("#topDatepicker2").datepicker({
-           dateFormat: 'yy-mm-dd'
-       });
+       
        $("#logo").click(function(){
-          window.location="index.jsp";
+          window.location="main.jsp";
        });
        $("#minusMaxSleepRoomsBtn").click(function(){
           var maxSleepRoomsCnt = parseFloat($("#maxSleepRoomsCnt").text());
@@ -195,14 +190,14 @@
                 contentType:'application/json',
                 dataType:'json',
                 data : JSON.stringify(data),
-                url : "addAccommodation.do?id=<%=id%>",
-                type : "POST",                  
+                url : "InsertHome.do?id=<%=id%>",
+                type : "GET",                  
                 success : function(data){
                    console.log(data);
                    alert("등록되었습니다.");
                 }   
              });
-             window.location="roomsList.jsp";
+             window.location="main.jsp";
           }
        });
     });
@@ -234,13 +229,10 @@
 					<h2 style="color: #fff;">&nbsp;&nbsp;메뉴</h2>
 					<div id="rollDown">
 						<div class="list-group">
-							<a href="mypage.jsp"
-								class="list-group-item list-group-item-action">마이 페이지</a> <a
-								href="getReservList.do?userId=<%=id%>"
-								class="list-group-item list-group-item-action">예약 리스트</a> <a
-								href="roomsList.jsp"
-								class="list-group-item list-group-item-action">숙박지 리스트</a> <a
-								href="logout.do" class="list-group-item list-group-item-action">로그아웃</a>
+							<a href="mypage.jsp" class="list-group-item list-group-item-action">마이 페이지</a> 
+							<a href="getReservList.do?userId=<%=id%>" class="list-group-item list-group-item-action">예약 리스트</a> 
+							<a href="roomsList.jsp" class="list-group-item list-group-item-action">숙박지 리스트</a> 
+							<a href="logout.do" class="list-group-item list-group-item-action">로그아웃</a>
 						</div>
 					</div>
 				</div>
@@ -324,8 +316,8 @@
 			<br> <font size="4px"><b>시/도
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 시군</b></font><br>
-			<input type="text" id="address1" name="address1" value="서울특별시" /> <input
-				type="text" id="address2" name="address2" value="예) 강남구" />
+			<input type="text" id="address1" name="address1" value="서울특별시" /> 
+			<input type="text" id="address2" name="address2" value="예) 강남구" />
 			<h3>도로명 / 건물번호 / 아파트 이름 / 건물 이름</h3>
 			<input type="text" id="address3" name="address3" value="예) 언주로 406">
 			<h3>아파트 / 건물명 및 동 / 호수 (선택사항)</h3>
@@ -352,8 +344,8 @@
 			<input type="checkbox" name="securityFacility_smoke" />연기 감지기<br>
 			<input type="checkbox" name="securityFacility_cm" />일산화탄소 감지기<br>
 			<input type="checkbox" name="securityFacility_firstaidkit" />구급상자<br>
-			<input type="checkbox" name="securityFacility_fire" />소화기<br> <input
-				type="checkbox" name="securityFacility_locker" />침실문 잠금장치<br>
+			<input type="checkbox" name="securityFacility_fire" />소화기<br> 
+			<input type="checkbox" name="securityFacility_locker" />침실문 잠금장치<br>
 
 			<h2>게스트가 어떤 공간을 사용할 수 있나요?</h2>
 			<input type="checkbox" name="usableFacility_privatelivingroom" />개인거실<br> 
@@ -379,9 +371,9 @@
 				name="description"> 
 				</textarea>
 			<h2>숙소의 좋은 점</h2>
-			<input type="checkbox" name="goodThing_family" />(아이 동반)가족<br> <input
-				type="checkbox" name="goodThing_group" />단체<br> <input
-				type="checkbox" name="goodThing_withpet" />반려동물 동반<br>
+			<input type="checkbox" name="goodThing_family" />(아이 동반)가족<br> 
+			<input type="checkbox" name="goodThing_group" />단체<br> 
+			<input type="checkbox" name="goodThing_withpet" />반려동물 동반<br>
 
 			<h2>이름 지정</h2>
 			<input type="text" id="setName" name="name" value="숙소 제목" />

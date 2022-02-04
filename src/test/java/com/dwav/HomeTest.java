@@ -157,7 +157,7 @@ public class HomeTest {
 		home01.setBathrooms(       home01.getBathrooms()    +upInt);
 		home01.setBedrooms(        home01.getBedrooms()     +upInt);
 		home01.setDescrption(      home01.getDescrption()   +updateStr);
-		home01.setHost_Id(         home01.getHost_Id()      +updateStr);
+		home01.setUser_id(         home01.getUser_id()      +updateStr);
 		home01.setLocation(        home01.getLocation()     +updateStr);
 		home01.setPrice(           home01.getPrice()        +upInt);
 		home01.setProperty_Type(   home01.getProperty_Type()+updateStr);
@@ -186,6 +186,7 @@ public class HomeTest {
 	}
 	
 	@Test
+//	@Ignore
 	public void RetrieveHome()throws SQLException{
 		search.setPageNum(1);
 		search.setPageSize(20);
@@ -202,7 +203,7 @@ public class HomeTest {
 		assertEquals(outVO.getBathrooms(),     homeVO.getBathrooms());
 		assertEquals(outVO.getBedrooms(),      homeVO.getBedrooms());
 		assertEquals(outVO.getDescrption(),    homeVO.getDescrption());
-		assertEquals(outVO.getHost_Id(),       homeVO.getHost_Id());
+		assertEquals(outVO.getUser_id(),       homeVO.getUser_id());
 		assertEquals(outVO.getLocation(),      homeVO.getLocation());
 		assertEquals(outVO.getPrice(),         homeVO.getPrice());
 		assertEquals(outVO.getProperty_Type(), homeVO.getProperty_Type());
