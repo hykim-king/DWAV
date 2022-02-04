@@ -40,7 +40,7 @@ public class HomeController {
 	@RequestMapping(value = "/home_view",method = RequestMethod.GET)
 	public String jsonView(Model model)throws SQLException{
 		
-		return "json/json_view";
+		return "home/home_view";
 	}
 	
 	
@@ -156,6 +156,14 @@ public class HomeController {
 		return jsonString;
 	} 
 	
+	@RequestMapping(value = "/InsertHome.do", method = RequestMethod.GET)
+    public String insertHome(Model model)throws SQLException{
+        LOG.debug("=======================");
+        LOG.debug("=insertHome=");
+        LOG.debug("=======================");
+
+        return "home/Inserthome";
+    }
 	
 	@RequestMapping(value="/InsertHome.do" ,method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")

@@ -34,7 +34,7 @@
     $(document).ready(function(){         
         var checkShow = false;
         $("#searchSubmitBtn").click(function(){
-           //alert($("#city").val() + " , " + $("#datepicker1").val() + " ~ " + $("#datepicker2").val() +" , "+$("#personnel option:selected").val());
+           alert($("#city").val() + " , " + $("#datepicker1").val() + " ~ " + $("#datepicker2").val() +" , "+$("#personnel option:selected").val());
            if($("#city").val() == "모든 위치" || $("#city").val() == ""){
               alert("위치를 입력해 주세요.");
            }else if($("#datepicker1").val() == "모든 날짜" || $("#datepicker1").val() == ""){
@@ -74,7 +74,7 @@
          }
         $("#body").css('height', 700); 
          $("#personnel").change(function(){
-            //alert($("#personnel option:selected").val());
+            alert($("#personnel option:selected").val());
          });
          $("#roomsListLink").click(function(){
             location.href = "???.do?accom_id="+realAccom_id;
@@ -125,6 +125,7 @@
                <h2 style="color:#fff;">&nbsp;&nbsp;메뉴</h2>
                <div id="rollDown">
                   <div class="list-group">
+                    <a href="../home/InsertHome.do" class="list-group-item list-group-item-action">방 등록하기</a>
                     <a href="mypage.jsp" class="list-group-item list-group-item-action">마이 페이지</a>
                     <a href="gethomeList.do?userId=<%=id %>" class="list-group-item list-group-item-action">예약 리스트</a>
                     <a href="roomsList.jsp" class="list-group-item list-group-item-action">숙박지 리스트</a>

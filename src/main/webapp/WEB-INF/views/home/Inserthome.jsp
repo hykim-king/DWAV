@@ -47,12 +47,7 @@
              checkShow = false;
           }
        });
-       $("#topDatepicker1").datepicker({
-           dateFormat: 'yy-mm-dd'
-       });      
-       $("#topDatepicker2").datepicker({
-           dateFormat: 'yy-mm-dd'
-       });
+       
        $("#logo").click(function(){
           window.location="main.jsp";
        });
@@ -196,13 +191,13 @@
                 dataType:'json',
                 data : JSON.stringify(data),
                 url : "InsertHome.do?id=<%=id%>",
-                type : "POST",                  
+                type : "GET",                  
                 success : function(data){
                    console.log(data);
                    alert("등록되었습니다.");
                 }   
              });
-             window.location="roomsList.jsp";
+             window.location="main.jsp";
           }
        });
     });
@@ -349,8 +344,8 @@
 			<input type="checkbox" name="securityFacility_smoke" />연기 감지기<br>
 			<input type="checkbox" name="securityFacility_cm" />일산화탄소 감지기<br>
 			<input type="checkbox" name="securityFacility_firstaidkit" />구급상자<br>
-			<input type="checkbox" name="securityFacility_fire" />소화기<br> <input
-				type="checkbox" name="securityFacility_locker" />침실문 잠금장치<br>
+			<input type="checkbox" name="securityFacility_fire" />소화기<br> 
+			<input type="checkbox" name="securityFacility_locker" />침실문 잠금장치<br>
 
 			<h2>게스트가 어떤 공간을 사용할 수 있나요?</h2>
 			<input type="checkbox" name="usableFacility_privatelivingroom" />개인거실<br> 
@@ -376,9 +371,9 @@
 				name="description"> 
 				</textarea>
 			<h2>숙소의 좋은 점</h2>
-			<input type="checkbox" name="goodThing_family" />(아이 동반)가족<br> <input
-				type="checkbox" name="goodThing_group" />단체<br> <input
-				type="checkbox" name="goodThing_withpet" />반려동물 동반<br>
+			<input type="checkbox" name="goodThing_family" />(아이 동반)가족<br> 
+			<input type="checkbox" name="goodThing_group" />단체<br> 
+			<input type="checkbox" name="goodThing_withpet" />반려동물 동반<br>
 
 			<h2>이름 지정</h2>
 			<input type="text" id="setName" name="name" value="숙소 제목" />

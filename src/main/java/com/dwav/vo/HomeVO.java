@@ -7,7 +7,7 @@ public class HomeVO {
 	private int    Bathrooms	   ;
 	private int    Bedrooms	       ;
 	private String Descrption	   ;
-	private String Host_Id	       ;
+	private String User_id	       ;
 	private String Location	       ;
 	private int    Price	       ;
 	private String Property_Type   ;
@@ -19,27 +19,6 @@ public class HomeVO {
 	private int    Avg_Point	   ;
 	
 	public HomeVO(){}
-
-	public HomeVO(int accom_Id, int accomodates, int bathrooms, int bedrooms, String descrption, String host_Id,
-			String location, int price, String property_Type, String room_Type, int beds, String building_Type,
-			String currency_Unit, String name, int avg_Point) {
-		super();
-		Accom_Id = accom_Id;
-		Accomodates = accomodates;
-		Bathrooms = bathrooms;
-		Bedrooms = bedrooms;
-		Descrption = descrption;
-		Host_Id = host_Id;
-		Location = location;
-		Price = price;
-		Property_Type = property_Type;
-		Room_Type = room_Type;
-		Beds = beds;
-		Building_Type = building_Type;
-		Currency_Unit = currency_Unit;
-		Name = name;
-		Avg_Point = avg_Point;
-	}
 
 	public int getAccom_Id() {
 		return Accom_Id;
@@ -81,12 +60,12 @@ public class HomeVO {
 		Descrption = descrption;
 	}
 
-	public String getHost_Id() {
-		return Host_Id;
+	public String getUser_id() {
+		return User_id;
 	}
 
-	public void setHost_Id(String host_Id) {
-		Host_Id = host_Id;
+	public void setUser_id(String user_id) {
+		User_id = user_id;
 	}
 
 	public String getLocation() {
@@ -164,11 +143,33 @@ public class HomeVO {
 	@Override
 	public String toString() {
 		return "HomeVO [Accom_Id=" + Accom_Id + ", Accomodates=" + Accomodates + ", Bathrooms=" + Bathrooms
-				+ ", Bedrooms=" + Bedrooms + ", Descrption=" + Descrption + ", Host_Id=" + Host_Id + ", Location="
+				+ ", Bedrooms=" + Bedrooms + ", Descrption=" + Descrption + ", User_id=" + User_id + ", Location="
 				+ Location + ", Price=" + Price + ", Property_Type=" + Property_Type + ", Room_Type=" + Room_Type
 				+ ", Beds=" + Beds + ", Building_Type=" + Building_Type + ", Currency_Unit=" + Currency_Unit + ", Name="
 				+ Name + ", Avg_Point=" + Avg_Point + ", toString()=" + super.toString() + "]";
 	}
+
+	public HomeVO(int accom_Id, int accomodates, int bathrooms, int bedrooms, String descrption, String user_id,
+			String location, int price, String property_Type, String room_Type, int beds, String building_Type,
+			String currency_Unit, String name, int avg_Point) {
+		super();
+		Accom_Id = accom_Id;
+		Accomodates = accomodates;
+		Bathrooms = bathrooms;
+		Bedrooms = bedrooms;
+		Descrption = descrption;
+		User_id = user_id;
+		Location = location;
+		Price = price;
+		Property_Type = property_Type;
+		Room_Type = room_Type;
+		Beds = beds;
+		Building_Type = building_Type;
+		Currency_Unit = currency_Unit;
+		Name = name;
+		Avg_Point = avg_Point;
+	}
+
 
 
 
