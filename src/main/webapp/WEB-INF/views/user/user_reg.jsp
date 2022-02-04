@@ -192,7 +192,7 @@
            });
            
            //향후 메인 jsp를 받게 되면, 회원가입 완료 시 메인 페이지로 이동할 수 있게 함.
-           /* window.location.href ="${CP}/main/main; */
+           window.location.href ="${CP}/main/main;
 
            
         });
