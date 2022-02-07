@@ -3,36 +3,21 @@ package com.dwav.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.dwav.vo.ReviewVO;
-import com.dwav.vo.SearchVO;
 import com.dwav.vo.WishListVO;
+import com.dwav.vo.SearchVO;
 
 
 
 public interface WishListDao {
 	
-	List<WishListVO> listIdx(WishListVO inVO) throws SQLException;
-
-	List<WishListVO> homeImg(WishListVO inVO) throws SQLException;
-
-	List<WishListVO> checkIn(WishListVO inVO) throws SQLException;
-
-	List<WishListVO> checkOut(WishListVO inVO) throws SQLException;
+	int doInsertWishList(WishListVO inVO) throws SQLException;
 	
-	List<WishListVO> homeType(WishListVO inVO) throws SQLException;
-	
-	List<WishListVO> homeFacility(WishListVO inVO) throws SQLException;
-	
-	List<WishListVO> homeRule(WishListVO inVO) throws SQLException;
-	
-	List<WishListVO> homeIdx(WishListVO inVO) throws SQLException;
-	
-	List<WishListVO> userId(WishListVO inVO) throws SQLException;
+	WishListVO doSelectWishList(WishListVO inVO) throws SQLException;
 
-	void dodeleteWishList(WishListVO wishList01);
-
-	int doInsertWishList(WishListVO wishList01);
-
-	List<ReviewVO> doRetrieveReview(SearchVO searchVO);
+	int dodeleteWishList(WishListVO inVO)throws SQLException;
+	
+	int doupdateWishList(WishListVO inVO)throws SQLException;
+	
+	/* List<WishListVO> doRetrieveWishList(SearchVO inVO) throws SQLException; */
 
 }

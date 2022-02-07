@@ -8,7 +8,7 @@ public class WishListVO {
 	private String checkOut;
 	
 	private String homeType;
-
+	private String text;
 	private int homeFacility;
 
 	private int homeRule;
@@ -144,38 +144,49 @@ public class WishListVO {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	
+	/**
+	 * @return the text
+	 */
+	public String getText() {
+		return text;
+	}
+
+	/**
+	 * @param text the text to set
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
 
 	@Override
 	public String toString() {
 		return "WishListVO [listIdx=" + listIdx + ", homeImage=" + homeImage + ", checkIn=" + checkIn + ", checkOut="
-				+ checkOut + ", homeType=" + homeType + ", homeFacility=" + homeFacility + ", homeRule=" + homeRule
-				+ ", homeIdx=" + homeIdx + ", userId=" + userId + "]";
+				+ checkOut + ", homeType=" + homeType + ", text=" + text + ", homeFacility=" + homeFacility
+				+ ", homeRule=" + homeRule + ", homeIdx=" + homeIdx + ", userId=" + userId + ", getListIdx()="
+				+ getListIdx() + ", getHomeImage()=" + getHomeImage() + ", getCheckIn()=" + getCheckIn()
+				+ ", getCheckOut()=" + getCheckOut() + ", getHomeType()=" + getHomeType() + ", getHomeFacility()="
+				+ getHomeFacility() + ", getHomeRule()=" + getHomeRule() + ", getHomeIdx()=" + getHomeIdx()
+				+ ", getUserId()=" + getUserId() + ", getText()=" + getText() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
-	public WishListVO(int listIdx, String homeImage, String checkIn, String checkOut, String homeType, int homeFacility,
-			int homeRule, int homeIdx, int userId) {
+	public WishListVO(int listIdx, String homeImage, String checkIn, String checkOut, String homeType, String text,
+			int homeFacility, int homeRule, int homeIdx, int userId) {
 		super();
 		this.listIdx = listIdx;
 		this.homeImage = homeImage;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.homeType = homeType;
+		this.text = text;
 		this.homeFacility = homeFacility;
 		this.homeRule = homeRule;
 		this.homeIdx = homeIdx;
 		this.userId = userId;
 	}
-
-	public String getText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setText(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	
 		
 	
 	
