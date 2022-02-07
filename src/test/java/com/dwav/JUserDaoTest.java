@@ -82,7 +82,7 @@ public class JUserDaoTest {
 	 * @throws SQLException
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void idCheck() throws SQLException{
 		// 1. 기존 데이터 삭제
 		dao.doDelete(user01);
@@ -111,7 +111,7 @@ public class JUserDaoTest {
 		
 	}
 	
-	
+	@Test
 	public void doUpdate() throws SQLException{
 		
 		dao.deleteAll();

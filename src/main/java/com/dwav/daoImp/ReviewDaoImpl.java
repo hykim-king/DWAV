@@ -10,13 +10,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.dwav.dao.ReviewDao;
-import com.dwav.vo.ImageVO;
 import com.dwav.vo.ReviewVO;
 import com.dwav.vo.SearchVO;
-import com.dwav.vo.UserVO;
 
+@Repository("reviewDao") // 서버가 시작될 때, 객체를 만들지 않고도 이 클래스는 자동으로 메모리에 등록됨
 public class ReviewDaoImpl implements ReviewDao {
 	
 	 final Logger  LOG = LogManager.getLogger(getClass());
@@ -24,17 +24,23 @@ public class ReviewDaoImpl implements ReviewDao {
 	 @Inject
 	 SqlSessionTemplate  sqlSessionTemplate;
 		
-		final String NAMESPACE = "mapper.imageMapper";
+	final String NAMESPACE = "dwav";
 		
-		@Autowired
-		SqlSession session;
+	@Autowired
+	SqlSession session;
+	
+	
+	public ReviewDaoImpl() {}
 	 
+	 /**
+	  * 성공 여부 성공 : 1, 실패 : 0
+	  */
 	@Override
-	public int doInsert(ReviewVO inVO) throws SQLException {
+	public int doInsertReview(ReviewVO inVO) throws SQLException {
 		int flag = 0;
 		String statement = NAMESPACE +".doInsertReview";
 		LOG.debug("==============================");
-		LOG.debug("====InsertHome====");
+		LOG.debug("====InsertReview====");
 		LOG.debug("=statement="+statement);
 		LOG.debug("=inVO="+inVO);
 		LOG.debug("==============================");	
@@ -45,7 +51,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public ReviewVO doSelectOne(ReviewVO inVO) throws SQLException {
+	public ReviewVO doSelectReview(ReviewVO inVO) throws SQLException {
 		ReviewVO outVO = null;
 		String statement = NAMESPACE +".doSelectReview";
 		LOG.debug("==============================");
@@ -63,7 +69,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public int doDelete(ReviewVO inVO) throws SQLException {
+	public int dodeleteReview(ReviewVO inVO) throws SQLException {
 		int flag = 0;
 		String statement = NAMESPACE + ".dodeleteReview";
 		LOG.debug("==============================");
@@ -76,7 +82,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public int doUpdate(ReviewVO inVO) throws SQLException {
+	public int doupdateReview(ReviewVO inVO) throws SQLException {
 		int flag = 0;
 		String statement = NAMESPACE + ".doupdateReview";
 		LOG.debug("==============================");
@@ -89,7 +95,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public List<ReviewVO> doRetrieve(SearchVO inVO) throws SQLException {
+	public List<ReviewVO> doRetrieveReview(SearchVO inVO) throws SQLException {
 		
 		String statement = NAMESPACE +".doRetrieveReview";
 		LOG.debug("==============================");

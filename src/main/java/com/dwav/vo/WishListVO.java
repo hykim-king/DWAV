@@ -16,6 +16,8 @@ public class WishListVO {
 	private int homeIdx;
 	
 	private int userId;
+	
+	WishListVO(){}
 
 	/**
 	 * @return the listIdx
@@ -162,6 +164,16 @@ public class WishListVO {
 		this.homeRule = homeRule;
 		this.homeIdx = homeIdx;
 		this.userId = userId;
+	}
+
+	public String getText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setText(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 		

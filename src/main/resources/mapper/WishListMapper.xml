@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dwav">
+<insert id = "doInsertWishList" parameterType="WishListVO">
+
+INSERT INTO wishList (
+    listIdx,
+    homeImage,
+    checkIn,
+    checkOut,
+    homeType,
+    homeFacility,
+    homeRule,
+    homeIdx,
+    userId
+) VALUES (
+    #{listIdx},
+    #{homeImage},
+    #{checkIn},
+    #{checkOut},
+    #{homeType},
+    #{homeFacility},
+    #{homeRule},
+    #{homeIdx},
+    #{userId}
+)
+
+</insert>
+
+<select id="doSelectWishList" parameterType="WishListVO" resultType="WishListVO">
+SELECT
+    listIdx,
+    homeImage,
+    checkIn,
+    checkOut,
+    homeType,
+    homeFacility,
+    homeRule,
+    homeIdx,
+    userId
+FROM
+    wishList
+where
+	listIdx = #{listIdx}	
+
+</select>
+
+<delete id="dodeleteWishList" parameterType="WishListVO" >
+DELETE FROM wishList
+WHERE
+        wishList = #{wishList}
+</delete>
+
+<update id="doupdateWishList" parameterType="WishListVO" >
+UPDATE wishList
+		SET
+		listIdx  =  #{ listIdx  },
+		homeImage   =  #{ homeImage  },
+		checkOut	   =  #{ checkOut  },
+		homeType	   =  #{ homeType  },
+		homeFacility	   =  #{ homeFacility  },
+		homeRule	   =  #{ homeRule  },
+		homeIdx	   =  #{ homeIdx  },
+		userId	   =  #{ userId  }        
+		
+							
+		where listIdx = #{listIdx} 
+
+</update>
+
+<sql id="reviewSearchCondition">
+        <!-- WHERE엘리멘트는 태그에 의해 컨텐츠가 리턴되면 단순히 "WHERE"만을 추가한다. 게다가 AND, OR로 시작하면 
+            AND나 OR을 지워버린다. -->
+        
+        <where>
+            <choose>
+            <when test=" '10' == searchDiv and '' != searchWord ">
+                    listIdx LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '20' == searchDiv and '' != searchWord  ">
+                    homeImage LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '30' == searchDiv and '' != searchWord  ">
+                    checkOut LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '40' == searchDiv and '' != searchWord  ">
+                    homeType LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '50' == searchDiv and '' != searchWord  ">
+                    homeFacility LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '60' == searchDiv and '' != searchWord  ">
+                    homeRule LIKE #{searchWord}||'%'
+                </when>
+       	    <when test=" '70' == searchDiv and '' != searchWord  ">
+                    homeIdx LIKE #{searchWord}||'%'
+                </when>
+           <when test=" '80' == searchDiv and '' != searchWord  ">
+                    userId LIKE #{searchWord}||'%'
+                </when>
+            </choose>
+        </where>
+    </sql>
+
+
+</mapper>

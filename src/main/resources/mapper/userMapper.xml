@@ -108,8 +108,7 @@
 
 
     <!-- 단건 조회 -->
-    <select id="doSelectOne" parameterType="UserVO"
-        resultMap="userResultMap">
+    <select id="doSelectOne" parameterType="UserVO" resultMap="userResultMap">
 
     <![CDATA[ 
         SELECT

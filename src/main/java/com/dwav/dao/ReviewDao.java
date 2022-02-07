@@ -9,7 +9,7 @@ import com.dwav.vo.ReviewVO;
 
 public interface ReviewDao {
 	
-	int doInsert(ReviewVO inVO) throws SQLException;
+	int doInsertReview(ReviewVO inVO) throws SQLException;
 
 	/**
 	 * 회원 조회
@@ -18,7 +18,7 @@ public interface ReviewDao {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	ReviewVO doSelectOne(ReviewVO inVO) throws SQLException;
+	ReviewVO doSelectReview(ReviewVO inVO) throws SQLException;
 	
 	/**
 	 * 회원 탈퇴
@@ -26,7 +26,7 @@ public interface ReviewDao {
 	 * @return 1(성공)/0(실패)
 	 * @throws SQLException
 	 */
-	int doDelete(ReviewVO inVO)throws SQLException;
+	int dodeleteReview(ReviewVO inVO)throws SQLException;
 	
 	/**
 	 * 회원 정보 수정
@@ -34,7 +34,7 @@ public interface ReviewDao {
 	 * @return 1(성공)/0(실패)
 	 * @throws SQLException
 	 */
-	int doUpdate(ReviewVO inVO)throws SQLException;
+	int doupdateReview(ReviewVO inVO)throws SQLException;
 	
 	
 	/**
@@ -43,7 +43,7 @@ public interface ReviewDao {
 	 * @return List<ReviewVO>
 	 * @throws SQLException
 	 */
-    List<ReviewVO>  doRetrieve(SearchVO inVO) throws SQLException;
+    List<ReviewVO>  doRetrieveReview(SearchVO inVO) throws SQLException;
     
     
     

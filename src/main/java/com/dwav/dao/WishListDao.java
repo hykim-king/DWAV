@@ -2,8 +2,9 @@ package com.dwav.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
+import com.dwav.vo.ReviewVO;
+import com.dwav.vo.SearchVO;
 import com.dwav.vo.WishListVO;
 
 
@@ -27,5 +28,11 @@ public interface WishListDao {
 	List<WishListVO> homeIdx(WishListVO inVO) throws SQLException;
 	
 	List<WishListVO> userId(WishListVO inVO) throws SQLException;
+
+	void dodeleteWishList(WishListVO wishList01);
+
+	int doInsertWishList(WishListVO wishList01);
+
+	List<ReviewVO> doRetrieveReview(SearchVO searchVO);
 
 }

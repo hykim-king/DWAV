@@ -19,7 +19,7 @@ INSERT INTO review (
 
 </insert>
 
-<select id="doSelectReview" parameterType="ReviewVO">
+<select id="doSelectReview" parameterType="ReviewVO" resultType="ReviewVO">
 SELECT
     review_id,
     accom_id,
@@ -36,7 +36,7 @@ where
 </select>
 
 
-<delete id="dodeleteReview" parameterType="ReviewVO">
+<delete id="dodeleteReview" parameterType="ReviewVO" >
 DELETE FROM review
 WHERE
         review_id = #{review_id}
@@ -44,7 +44,7 @@ WHERE
 
 
 
-<update id="doupdateReview" parameterType="ReviewVO">
+<update id="doupdateReview" parameterType="ReviewVO" >
 UPDATE review
 		SET
 		review_id  =  #{ review_id  },
@@ -58,5 +58,70 @@ UPDATE review
 		where review_id = #{review_id} 
 
 </update>
+
+
+
+
+    <sql id="reviewSearchCondition">
+        <!-- WHERE엘리멘트는 태그에 의해 컨텐츠가 리턴되면 단순히 "WHERE"만을 추가한다. 게다가 AND, OR로 시작하면 
+            AND나 OR을 지워버린다. -->
+        
+        <where>
+            <choose>
+            <when test=" '10' == searchDiv and '' != searchWord ">
+                    review_id LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '20' == searchDiv and '' != searchWord  ">
+                    accom_id LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '30' == searchDiv and '' != searchWord  ">
+                    text LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '40' == searchDiv and '' != searchWord  ">
+                    user_id LIKE #{searchWord}||'%'
+                </when>
+            <when test=" '50' == searchDiv and '' != searchWord  ">
+                    title LIKE #{searchWord}||'%'
+                </when>
+            </choose>
+        </where>
+    </sql>
+
+
+<select id = "doRetrieveReview" parameterType="SearchVO" resultType="ReviewVO">
+
+SELECT A.*, B.*
+	FROM(
+		SELECT tt1.rnum as num
+			,tt1.review_id
+			,tt1.accom_id 
+			,tt1.text	 
+			,tt1.user_id	 
+			,tt1.point	 
+			,tt1.title	 
+		FROM(
+			select rownum rnum,T1.*
+			FROM(
+				select *
+				FROM review
+				-- 검색 조건 : review_id(10)/accom_id(20)/text(30)/user_id(40)/숙소 이름(50)
+				<include refid="reviewSearchCondition"/>
+				
+				order by review_id
+				)T1
+			)tt1
+			--paging
+			where rnum between #{pageSize}*(#{pageNum}-1)+1 and #{pageSize}*(#{pageNum}-1)+#{pageSize}
+	)A
+	CROSS JOIN
+	(
+		SELECT COUNT(*) total_cnt
+		FROM review
+		-- 검색 조건
+		<include refid="reviewSearchCondition"/>
+	)B
+
+</select>
+
 
 </mapper>

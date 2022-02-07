@@ -1,26 +1,17 @@
 package com.dwav.daoImp;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.dwav.dao.WishListDao;
+import com.dwav.vo.ReviewVO;
+import com.dwav.vo.SearchVO;
 import com.dwav.vo.WishListVO;
-import com.sun.mail.imap.protocol.Namespaces.Namespace;
 
 @Repository
 public class WishListDaoImpl implements WishListDao {
@@ -176,6 +167,29 @@ public class WishListDaoImpl implements WishListDao {
 		}
 		
 		return list;
+	}
+
+
+	@Override
+	public void dodeleteWishList(WishListVO wishList01) {
+		
+		
+	}
+
+	
+
+
+	@Override
+	public List<ReviewVO> doRetrieveReview(SearchVO searchVO) {
+		
+		return null;
+	}
+
+
+	@Override
+	public int doInsertWishList(WishListVO wishList01) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
